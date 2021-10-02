@@ -47,7 +47,9 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
     // Step-6: fill `i+1` in the hash table
     for (int i=0; i<numsSize; i++)
     {
-      hashTable[nums[i]] = i+1;
+
+       //if ( hashTable[nums[i]] != 0 ) hashTable[nums[i]] = i+1;
+       hashTable[nums[i]] = i+1;
 
 #     ifdef DEBUG
       printf("hashTable[%d] = %d\n", nums[i], hashTable[nums[i]]);
@@ -59,8 +61,12 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
 
     for (int i=0; i<numsSize; i++)
     {
-      if ( target-nums[i]<max+1 && hashTable[target-nums[i]] != 0)
+      if ( target-nums[i] > 0 && target-nums[i]<max+1 &&  hashTable[target-nums[i]] != 0)
       {
+#       ifdef DEBUG
+        printf("idx of hashTable[] = target - nums[%d] = %d - %d = %d\n", i, target, nums[i], target-nums[i]);
+#       endif
+
         *returnSize = 2;
         returnArry = (int*)malloc(*returnSize * sizeof(int));
 
@@ -77,14 +83,14 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
 int main ()
 {
   int numsSize    = 4;
-  int target      = 9;
+  int target      = 7;
 
   int *nums       = malloc(numsSize*sizeof(int));
   int *returnArry = NULL;
   int  returnSize;
 
   nums[0] =  2;
-  nums[1] =  7;
+  nums[1] =  5;
   nums[2] = 11;
   nums[3] = 15;
 //  nums[4] =  4;
