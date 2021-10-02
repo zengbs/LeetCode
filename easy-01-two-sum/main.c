@@ -96,18 +96,18 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
 
 int main ()
 {
-  int numsSize    = 4;
-  int target      = 9;
+  int numsSize    =  4;
+  int target      = -8;
 
   int *nums       = malloc(numsSize*sizeof(int));
   int *returnArry = NULL;
   int  returnSize;
 
 
-  nums[0] =  2;
-  nums[1] =  7;
-  nums[2] = 11;
-  nums[3] = 15;
+  nums[0] =  -4;
+  nums[1] =   7;
+  nums[2] =  -4;
+  nums[3] =  15;
   //nums[4] =  4;
 
   returnArry = twoSum(nums, numsSize, target, &returnSize);
