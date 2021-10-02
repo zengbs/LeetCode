@@ -3,7 +3,7 @@
 #include<limits.h>
 
 struct Stack{
-  long int capacity;
+  unsigned long int capacity;
   long int top;
   char *stackPtr;
 };
@@ -71,18 +71,35 @@ void displayStack(struct Stack *stack)
 
 
 
-int reverse( int input )
-{
-  int output;
-
-
-  return output;
-}
+//int reverse( int input )
+//{
+//  int output;
+//
+//
+//  return output;
+//}
 
 int main()
 {
+  unsigned long int capacity = 5;
+
+  struct Stack *stack = createStack(capacity, sizeof(int));
 
 
+  push (stack, 'a');
+
+  printf("top = %ld\n", stack->top);
+
+  push (stack, 'b');
+  printf("top = %ld\n", stack->top);
+  push (stack, 'c');
+  printf("top = %ld\n", stack->top);
+  push (stack, 'd');
+  printf("top = %ld\n", stack->top);
+  push (stack, 'e');
+  printf("top = %ld\n", stack->top);
+
+  displayStack(stack);
 
   return 0;
 }
