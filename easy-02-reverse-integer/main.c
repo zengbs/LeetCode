@@ -5,7 +5,7 @@
 struct Stack{
   unsigned long int capacity;
   long int top;
-  char *stackPtr;
+  int *stackPtr;
 };
 
 struct Stack* createStack(unsigned long int capacity, size_t sizePerItem)
@@ -23,7 +23,7 @@ void freeStack(struct Stack *stack)
   free(stack);
 }
 
-void push(struct Stack *stack, char item)
+void push(struct Stack *stack, int item)
 {
   if (stack->top == stack->capacity - 1){
     printf("stack overflow!\n");
@@ -34,7 +34,7 @@ void push(struct Stack *stack, char item)
   }
 }
 
-char pop(struct Stack *stack, int line)
+int pop(struct Stack *stack, int line)
 {
   if (stack->top == - 1){
     printf("stack underflow at %d!\n", line);
@@ -45,7 +45,7 @@ char pop(struct Stack *stack, int line)
   }
 }
 
-char peek(struct Stack *stack, long int line)
+int peek(struct Stack *stack, long int line)
 {
   if (stack->top == - 1){
     return '\0';
@@ -54,6 +54,8 @@ char peek(struct Stack *stack, long int line)
     return stack->stackPtr[stack->top];
   }
 }
+
+
 void displayStack(struct Stack *stack)
 {
   if (stack->top == - 1){
@@ -62,44 +64,75 @@ void displayStack(struct Stack *stack)
   }
   else{
       for(long int i=stack->top; i > -1; i--){
-        printf("%c", stack->stackPtr[i]);
+        printf("%d", stack->stackPtr[i]);
       }
       printf("\n");
   }
 }
 
 
-
-
-//int reverse( int input )
-//{
-//  int output;
-//
-//
-//  return output;
-//}
-
-int main()
+int displayStackInverse(struct Stack *stack)
 {
-  unsigned long int capacity = 5;
+  int output = 0;
+  int base   = 1;
+
+  if (stack->top == - 1){
+    printf("stack is empty!\n");
+    exit(0);
+  }
+  else{
+      for(long int i=stack->top; i > -1; i--){
+
+        output += base*stack->stackPtr[i];
+
+        base *= 10;
+
+      }
+  }
+
+  return output;
+}
+
+
+
+
+int reverse( int input )
+{
+
+  unsigned long int capacity = 0;
+
+  int input2 = input;
+  int digit;
+
+  while(input >= 1){
+    digit = input % 10;
+    input -= digit;
+    input /= 10;
+    capacity++;
+  }
 
   struct Stack *stack = createStack(capacity, sizeof(int));
 
+  input = input2;
 
-  push (stack, 'a');
+  while(input >= 1){
+    digit = input % 10;
+    input -= digit;
+    input /= 10;
+    push (stack, digit);
+  }
 
-  printf("top = %ld\n", stack->top);
 
-  push (stack, 'b');
-  printf("top = %ld\n", stack->top);
-  push (stack, 'c');
-  printf("top = %ld\n", stack->top);
-  push (stack, 'd');
-  printf("top = %ld\n", stack->top);
-  push (stack, 'e');
-  printf("top = %ld\n", stack->top);
+  return displayStackInverse(stack);
 
-  displayStack(stack);
+}
+
+int main()
+{
+
+  int input = 54321;
+
+  printf("%d\n", reverse(input));
 
   return 0;
 }
