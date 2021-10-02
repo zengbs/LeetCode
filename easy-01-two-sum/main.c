@@ -1,9 +1,10 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include <limits.h>
 
 
-#define DEBUG
+//#define DEBUG
 
 /**
  * Note: The returned array must be malloced, assume caller calls free().
@@ -44,12 +45,19 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
 
     for (int i=0; i<max+1; i++) hashTable[i] = 0;
 
+    int j = 0;
+    bool duplicate = false;
+
     // Step-6: fill `i+1` in the hash table
     for (int i=0; i<numsSize; i++)
     {
 
-       //if ( hashTable[nums[i]] != 0 ) hashTable[nums[i]] = i+1;
-       hashTable[nums[i]] = i+1;
+       if ( hashTable[nums[i]] == 0 ) hashTable[nums[i]] = i+1;
+       else
+       {
+         duplicate = true;
+         j = i;
+       }
 
 #     ifdef DEBUG
       printf("hashTable[%d] = %d\n", nums[i], hashTable[nums[i]]);
@@ -58,6 +66,8 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
 
     // Step-7:
     int *returnArry = NULL;
+
+    bool second = false;
 
     for (int i=0; i<numsSize; i++)
     {
@@ -70,9 +80,13 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
         *returnSize = 2;
         returnArry = (int*)malloc(*returnSize * sizeof(int));
 
-        returnArry[0] = hashTable[target-nums[i]]-1;
-        returnArry[1] = i;
+        if (second && duplicate) returnArry[1] = j;
+        else                     returnArry[0] = i;
+
+        second = true;
       }
+
+      //printf("%d %d\n", i, j);
     }
 
     // Step-8:
@@ -83,17 +97,18 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
 int main ()
 {
   int numsSize    = 4;
-  int target      = 7;
+  int target      = 9;
 
   int *nums       = malloc(numsSize*sizeof(int));
   int *returnArry = NULL;
   int  returnSize;
 
+
   nums[0] =  2;
-  nums[1] =  5;
+  nums[1] =  7;
   nums[2] = 11;
   nums[3] = 15;
-//  nums[4] =  4;
+  //nums[4] =  4;
 
   returnArry = twoSum(nums, numsSize, target, &returnSize);
 
