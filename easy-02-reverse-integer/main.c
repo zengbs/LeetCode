@@ -34,26 +34,26 @@ void push(struct Stack *stack, int item)
   }
 }
 
-int pop(struct Stack *stack, int line)
-{
-  if (stack->top == - 1){
-    printf("stack underflow at %d!\n", line);
-    exit(0);
-  }
-  else{
-    return stack->stackPtr[stack->top--];
-  }
-}
+//int pop(struct Stack *stack, int line)
+//{
+//  if (stack->top == - 1){
+//    printf("stack underflow at %d!\n", line);
+//    exit(0);
+//  }
+//  else{
+//    return stack->stackPtr[stack->top--];
+//  }
+//}
 
-int peek(struct Stack *stack, long int line)
-{
-  if (stack->top == - 1){
-    return '\0';
-  }
-  else{
-    return stack->stackPtr[stack->top];
-  }
-}
+//int peek(struct Stack *stack, long int line)
+//{
+//  if (stack->top == - 1){
+//    return '\0';
+//  }
+//  else{
+//    return stack->stackPtr[stack->top];
+//  }
+//}
 
 
 void displayStack(struct Stack *stack)
@@ -101,6 +101,20 @@ int reverse( int input )
 
   unsigned long int capacity = 0;
 
+  int positive = 0;
+
+  if (input > 0){
+    positive =  1;
+  }
+  else if (input < 0){
+    positive = -1;
+    input = -input;
+  }
+  else{
+    positive =  0;
+    return 0;
+  }
+
   int input2 = input;
   int digit;
 
@@ -123,14 +137,20 @@ int reverse( int input )
   }
 
 
-  return displayStackInverse(stack);
+  int output = displayStackInverse(stack);
+
+  freeStack( stack );
+
+  if (positive == -1) output = -output;
+
+  return output;
 
 }
 
 int main()
 {
 
-  int input = 54321;
+  int input = -5432100;
 
   printf("%d\n", reverse(input));
 
