@@ -93,6 +93,7 @@ int32_t displayStackInverse(struct Stack *stack)
         printf("i=%d, stack->top=%d, output=%d\n", i, stack->top, output);
 #       endif
 
+// if i == 0 and input == -2147483412 then code will crash
         if ( i != 0 && checkInt32Overflow( base, 10, '*', __LINE__ ) )  return 0;
 
         base *= 10;
@@ -136,7 +137,6 @@ int32_t reverse( int32_t input )
   int32_t input2 = input;
   int32_t digit;
 
-  printf("input=%d\n", input);
 
   while(input >= 1){
     digit = input % 10;
@@ -145,7 +145,6 @@ int32_t reverse( int32_t input )
     capacity++;
   }
 
-  printf("capacity=%d\n", capacity);
 
   struct Stack *stack = createStack(capacity, sizeof(int32_t));
 
@@ -173,7 +172,7 @@ int32_t reverse( int32_t input )
 int main()
 {
 
-  int32_t input = -2147483648;
+  int32_t input = -2147483412;
 
 # ifdef DEBUG
   printf("INT32_MAX=%+d\n", INT32_MAX);
