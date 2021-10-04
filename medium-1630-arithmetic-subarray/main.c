@@ -21,7 +21,7 @@ bool* checkArithmeticSubarrays(int* nums, int numsSize, int* l, int lSize,
 
   int lrSize;
 
-  printf("[");
+  bool *returnedArry = malloc(sizeof(bool)* (*returnSize));
 
   for (int i=0; i<rSize; i++)
   {
@@ -47,6 +47,8 @@ bool* checkArithmeticSubarrays(int* nums, int numsSize, int* l, int lSize,
       if (diff1 != diff0) arithmetic &= false;
     }
 
+    returnedArry[i] = arithmetic;
+
 #   ifdef DEBUG
     for(int i=0; i<lrSize; i++)
     {
@@ -54,13 +56,9 @@ bool* checkArithmeticSubarrays(int* nums, int numsSize, int* l, int lSize,
     }
 #   endif
 
-    if ( arithmetic ) printf("true");
-    else              printf("false");
-
-    if (i<rSize-1) printf(",");
   }
 
-  printf("]\n");
+  return returnedArry;
 }
 
 
@@ -82,13 +80,17 @@ int main ()
 
   boolArry = checkArithmeticSubarrays(nums, numsSize, l, lSize, r, rSize, &returnSize);
 
+  printf("[");
 
-  //for (int i=0;i<returnSize ; i++)
-  //{
-  //   if ( boolArry[i] ) printf("true ");
-  //   else               printf("false ");
-  //}
+  for (int i=0;i<returnSize;i++)
+  {
+    if ( boolArry[i] ) printf("true");
+    else              printf("false");
 
+    if (i<rSize-1) printf(",");
+  }
+
+  printf("]\n");
 
   return 0;
 }
