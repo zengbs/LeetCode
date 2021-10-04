@@ -23,7 +23,7 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
     // Step-2: add `abs(min)+1` to each element in `num`
     for (int i=0; i<numsSize; i++)
     {
-      nums[i] += abs(min)+1;
+      nums[i] += abs(min);
 
 #     ifdef DEBUG
       printf("%d\n", nums[i]);
@@ -31,11 +31,11 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
     }
 
     // Step-3: add `2*(abs(min)+1)` to `target`
-    target += 2*(abs(min)+1);
+    target += 2*(abs(min));
 
     // Step-4: add `abs(min)+1` to `max`, `min`
-    max += abs(min)+1;
-    min += abs(min)+1;
+    max += abs(min);
+    min += abs(min);
 
 #   ifdef DEBUG
     printf("max = %d, min = %d\n", max, min);
@@ -43,7 +43,7 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
     // Step-5: create a hash tabel with `max+1` in size and initialize with zero
     int hashTable[max+1];
 
-    for (int i=0; i<max+1; i++) hashTable[i] = 0;
+    for (int i=0; i<max+1; i++) hashTable[i] = -1;
 
     int j = 0;
     bool duplicate = false;
@@ -52,7 +52,7 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
     for (int i=0; i<numsSize; i++)
     {
 
-       if ( hashTable[nums[i]] == 0 ) hashTable[nums[i]] = i+1;
+       if ( hashTable[nums[i]] == -1 ) hashTable[nums[i]] = i;
        else
        {
          duplicate = true;
@@ -71,7 +71,7 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
 
     for (int i=0; i<numsSize; i++)
     {
-      if ( target-nums[i] > 0 && target-nums[i]<max+1 &&  hashTable[target-nums[i]] != 0)
+      if ( target-nums[i] >= 0 && target-nums[i]<max+1 &&  hashTable[target-nums[i]] != -1)
       {
 #       ifdef DEBUG
         printf("idx of hashTable[] = target - nums[%d] = %d - %d = %d\n", i, target, nums[i], target-nums[i]);
@@ -97,14 +97,14 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
 int main ()
 {
   int numsSize    =  4;
-  int target      = -8;
+  int target      = -7;
 
   int *nums       = malloc(numsSize*sizeof(int));
   int *returnArry = NULL;
   int  returnSize;
 
 
-  nums[0] =  -4;
+  nums[0] =  -3;
   nums[1] =   7;
   nums[2] =  -4;
   nums[3] =  15;
