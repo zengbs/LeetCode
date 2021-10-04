@@ -4,6 +4,12 @@
 
 
 
+int compare (const void * a, const void * b)
+{
+  return ( *(int*)a - *(int*)b );
+}
+
+
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
@@ -26,22 +32,19 @@ bool* checkArithmeticSubarrays(int* nums, int numsSize, int* l, int lSize,
       lr[j-l[i]] = nums[j];
     }
 
+    qsort (lr, lrSize, sizeof(int), compare);
+
     for(int i=0; i<lrSize; i++)
     {
       printf("%d ", lr[i]);
     }
+
   }
 
   printf("\n");
-  //qsort (lr, lrSize, sizeof(int), compare);
 
 }
 
-
-int compare (const void * a, const void * b)
-{
-  return ( *(int*)a - *(int*)b );
-}
 
 int main ()
 {
