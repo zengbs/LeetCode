@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <limits.h>
 
 
 
@@ -23,31 +24,38 @@ bool* checkArithmeticSubarrays(int* nums, int numsSize, int* l, int lSize,
 
   bool *returnedArry = malloc(sizeof(bool)* (*returnSize));
 
+  int rMax = INT_MIN;
+  int lMin = INT_MAX;
+
+  bool arithmetic = false;
+
   for (int i=0; i<rSize; i++)
   {
-    lrSize = r[i] - l[i] + 1;
 
-    int lr[lrSize];
+      lrSize = r[i] - l[i] + 1;
 
-    for (int j=0; j<r[i]-l[i]+1; j++)
-    {
-      lr[j] = nums[j+l[i]];
-    }
+      int lr[lrSize];
 
-    qsort (lr, lrSize, sizeof(int), compare);
+      for (int j=0; j<r[i]-l[i]+1; j++)
+      {
+        lr[j] = nums[j+l[i]];
+      }
 
-    int diff0 = lr[1] - lr[0];
+      qsort (lr, lrSize, sizeof(int), compare);
 
-    bool arithmetic = true;
+      int diff0 = lr[1] - lr[0];
 
-    for (int j=2; j<r[i]-l[i]+1; j++)
-    {
-      int diff1 = lr[j] - lr[j-1];
+      arithmetic = true;
 
-      if (diff1 != diff0) arithmetic &= false;
-    }
+      for (int j=2; j<r[i]-l[i]+1; j++)
+      {
+        int diff1 = lr[j] - lr[j-1];
 
-    returnedArry[i] = arithmetic;
+        if (diff1 != diff0) arithmetic &= false;
+      }
+
+      returnedArry[i] = arithmetic;
+  }
 
 #   ifdef DEBUG
     for(int i=0; i<lrSize; i++)
@@ -56,7 +64,6 @@ bool* checkArithmeticSubarrays(int* nums, int numsSize, int* l, int lSize,
     }
 #   endif
 
-  }
 
   return returnedArry;
 }
@@ -65,13 +72,13 @@ bool* checkArithmeticSubarrays(int* nums, int numsSize, int* l, int lSize,
 int main ()
 {
 
-  int lSize = 6;
-  int rSize = 6;
-  int numsSize = 11;
+  int lSize = 9;
+  int rSize = 9;
+  int numsSize = 19;
 
-  int l[6]     = {0,1,6,4,8,7};
-  int r[6]     = {4,4,9,7,9,10};
-  int nums[11] = {-12,-9,-3,-12,-6,15,20,-25,-20,-15,-10};
+  int l[9]     = {14,5,11,15,12,13, 9,7,0};
+  int r[9]     = {15,8,14,18,15,16,12,8,1};
+  int nums[19] = {1,2,10,-6,-7,8,16,0,0,10,20,15,-2,-3,-1,-4,-4,-8,-2};
 
 
   int returnSize;
