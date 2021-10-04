@@ -67,28 +67,14 @@ bool* checkArithmeticSubarrays(int* nums, int numsSize, int* l, int lSize,
 int main ()
 {
 
-  int lSize = 3;
-  int rSize = 3;
-  int numsSize = 6;
+  int lSize = 6;
+  int rSize = 6;
+  int numsSize = 11;
 
-  int l[lSize];
-  int r[rSize];
-  int nums[numsSize];
+  int l[6]     = {0,1,6,4,8,7};
+  int r[6]     = {4,4,9,7,9,10};
+  int nums[11] = {-12,-9,-3,-12,-6,15,20,-25,-20,-15,-10};
 
-  l[0] = 0;
-  l[1] = 0;
-  l[2] = 2;
-
-  r[0] = 2;
-  r[1] = 3;
-  r[2] = 5;
-
-  nums[0] = 4;
-  nums[1] = 6;
-  nums[2] = 5;
-  nums[3] = 9;
-  nums[4] = 3;
-  nums[5] = 7;
 
   int returnSize;
 
