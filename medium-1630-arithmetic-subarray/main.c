@@ -21,28 +21,46 @@ bool* checkArithmeticSubarrays(int* nums, int numsSize, int* l, int lSize,
 
   int lrSize;
 
+  printf("[");
+
   for (int i=0; i<rSize; i++)
   {
     lrSize = r[i] - l[i] + 1;
 
     int lr[lrSize];
 
-    for (int j=l[i]; j<r[i]+1; j++)
+    for (int j=0; j<r[i]-l[i]+1; j++)
     {
-      lr[j-l[i]] = nums[j];
+      lr[j] = nums[j+l[i]];
     }
 
     qsort (lr, lrSize, sizeof(int), compare);
 
+    int diff0 = lr[1] - lr[0];
+
+    bool arithmetic = true;
+
+    for (int j=2; j<r[i]-l[i]+1; j++)
+    {
+      int diff1 = lr[j] - lr[j-1];
+
+      if (diff1 != diff0) arithmetic &= false;
+    }
+
+#   ifdef DEBUG
     for(int i=0; i<lrSize; i++)
     {
       printf("%d ", lr[i]);
     }
+#   endif
 
+    if ( arithmetic ) printf("true");
+    else              printf("false");
+
+    if (i<rSize-1) printf(",");
   }
 
-  printf("\n");
-
+  printf("]\n");
 }
 
 
