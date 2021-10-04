@@ -57,12 +57,12 @@ bool* checkArithmeticSubarrays(int* nums, int numsSize, int* l, int lSize,
       returnedArry[i] = arithmetic;
   }
 
-#   ifdef DEBUG
-    for(int i=0; i<lrSize; i++)
-    {
-      printf("%d ", lr[i]);
-    }
-#   endif
+# ifdef DEBUG
+  for(int i=0; i<lrSize; i++)
+  {
+    printf("%d ", lr[i]);
+  }
+# endif
 
 
   return returnedArry;
