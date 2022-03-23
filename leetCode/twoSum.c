@@ -14,8 +14,8 @@
 //      * put the value/index in the array into a newNode hashTable with the hashed value
 //        where the hashed value = abs(value) % arrySize
 //      * if collision, we insert a new node in the following manner:
-//        (hashTable[t]) --> (hashTable[t]->next)
-//        (hashTable[t]) --> (newNode) --> (hashTable[t]->next)
+//        (hashTable[t]) --> (oldNode)
+//        (hashTable[t]) --> (newNode) --> (oldNode)
 //
 //      * the configuration of hash table is as follows:
 //
