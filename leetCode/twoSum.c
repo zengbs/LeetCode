@@ -20,9 +20,12 @@ struct node {
 };
 
 // =============================================================================
-// Description : hash(value) = abs(value) % arrySize
-// Description : (hashTable[t]) --> (hashTable[t]->next)
-//               (hashTable[t]) --> (newNode) --> (hashTable[t]->next)
+// Description : put the value in the arry into the hashTable with the index hash(value)
+//               where hash(value) = abs(value) % arrySize
+//
+//               --> if collision, we insert a new node in the following manner:
+//                   (hashTable[t]) --> (hashTable[t]->next)
+//                   (hashTable[t]) --> (newNode) --> (hashTable[t]->next)
 //
 // Input       : hashTable : chaining hash table
 //               value     : the value to be inseted into linked list
