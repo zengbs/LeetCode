@@ -37,11 +37,13 @@
 //  index : the index of the value in the array given by the problem
 // =============================================================================
 
-struct node {
+struct node_s {
     long value;
     int index;
-    struct node* next;
+    struct node_s* next;
 };
+
+typedef struct node_s node_t;
 
 // =============================================================================
 // Description : put the value in the arry into the hashTable with the index hash(value)
@@ -60,10 +62,10 @@ struct node {
 // Output      : none
 // =============================================================================
 
-void insert(struct node** hashTable, long value, int index, int arrySize) {
+void insert(node_t** hashTable, long value, int index, int arrySize) {
     int t = abs(value) % arrySize;
 
-    struct node* newNode = (struct node*)malloc(sizeof(struct node));
+    node_t* newNode = (node_t*)malloc(sizeof(node_t));
     newNode->value = value;
     newNode->index = index;
     newNode->next = hashTable[t]->next;
@@ -80,9 +82,9 @@ void insert(struct node** hashTable, long value, int index, int arrySize) {
 //          --> return -1 if the target is not found
 // =============================================================================
 
-int search(struct node** hashTable, long target, int arrySize) {
+int search(node_t** hashTable, long target, int arrySize) {
     int index = abs(target) % arrySize;
-    struct node* indexNext = hashTable[index]->next;
+    node_t* indexNext = hashTable[index]->next;
 
     while(indexNext) {
         if(indexNext->value == target) {
@@ -95,9 +97,9 @@ int search(struct node** hashTable, long target, int arrySize) {
 }
 
 
-void freeHashTable(struct node** hashTable, int arrySize) {
+void freeHashTable(node_t** hashTable, int arrySize) {
     int i = 0;
-    struct node *temp = NULL, *delete = NULL;
+    node_t *temp = NULL, *delete = NULL;
     for(i = 0; i < arrySize; i++) {
         temp = hashTable[i];
         delete = temp;
@@ -113,15 +115,15 @@ void freeHashTable(struct node** hashTable, int arrySize) {
 
 
 int* twoSum(int* arry, int arrySize, int target) {
-    int i, j = 0;
+    int i = 0;
     int index = 0;
     int* result = NULL;
 
     // allocate memory for hashTable with the size of arrySize
-    struct node** hashTable = (struct node**)malloc(arrySize * sizeof(struct node*));
+    node_t** hashTable = (node_t**)malloc(arrySize * sizeof(node_t*));
 
     // allocate memory for all head nodes in the hashTable
-    for(i = 0; i < arrySize; i++) hashTable[i] = (struct node*)calloc(1, sizeof(struct node));
+    for(i = 0; i < arrySize; i++) hashTable[i] = (node_t*)calloc(1, sizeof(node_t));
 
     // initialize all `next` nodes are NULL
     for(i = 0; i < arrySize; i++) hashTable[i]->next = NULL;
