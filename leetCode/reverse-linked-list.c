@@ -98,6 +98,18 @@ void printList( node_t* head )
 
 
 
+void freeList( node_t** head )
+{
+  node_t *curr = *head;
+  node_t *next;
+
+   while( curr != NULL ){
+      next = curr->next;
+      free(curr);
+      curr = next;
+   }
+}
+
 int main()
 {
    node_t *head = NULL;
@@ -105,6 +117,7 @@ int main()
    printList(head);
    reverseList(&head);
    printList(head);
+   freeList(&head);
 
    return 0;
 }
