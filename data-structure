@@ -1,0 +1,49 @@
+array
+linked list
+XOR linked list
+stack
+queue
+heap
+recursion
+binary search
+
+Tree
+binary tree
+max-tree
+binary search tree
+trie
+red-black tree
+B-tree
+
+Graph
+-- bfs
+-- dfs
+-- topological sort
+
+sortings
+-- merge sort
+-- quick sort
+-- selection sort
+-- heap sort
+-- insertion sort
+-- shell sort
+-- tree sort
+
+Linear-time sorting
+-- counting sort
+-- Bucket sort
+-- Radix sort
+
+string matching
+-- Robin-Karp
+-- KMP
+
+disjoint set
+-- weighted Union
+-- path compression
+
+hashing
+-- open addressing
+-- chaining
+-- hash function
+-- dynamic hashing

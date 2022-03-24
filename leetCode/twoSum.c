@@ -1,5 +1,5 @@
 // TITLE: two sum
-// TAG  : array hash
+// TAG  : array hash chaining
 // LEVEL: easy
 
 // https://www.itread01.com/content/1543933144.html
