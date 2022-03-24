@@ -37,7 +37,7 @@ typedef struct node_s node_t;
 //         NULL<--|a3|<--|a2|<--|a1|   NULL
 // Step7:
 //                              prev   curr/next
-//         NULL<--|a3|<--|a2|<--|a1|     NULL
+//         NULL<--|a3|<--|a2|<--|a1|   NULL
 //
 // ==========================================================
 void reverseList( node_t** head ){
@@ -45,8 +45,8 @@ void reverseList( node_t** head ){
 
    node_t *curr, *prev, *next;
 
-   curr = *head;
    prev = NULL;
+   curr = *head;
 
    while( curr != NULL ){
       next = curr->next;
@@ -59,9 +59,9 @@ void reverseList( node_t** head ){
 }
 
 // ==========================================================
-// head:|a1|:     |a1|-->NULL
-// head:|a2|:     |a2|-->|a1|-->NULL
-// head:|a3|:     |a3|-->|a2|-->|a1|-->NULL
+// head:|a1|-->NULL
+// head:|a2|-->|a1|-->NULL
+// head:|a3|-->|a2|-->|a1|-->NULL
 // ==========================================================
 
 void createList( node_t** head, int length ){
