@@ -59,9 +59,10 @@ void reverseList( node_t** head ){
 }
 
 // ==========================================================
-// head:|a1|-->NULL
-// head:|a2|-->|a1|-->NULL
-// head:|a3|-->|a2|-->|a1|-->NULL
+//           head
+// Step1:    |a1|-->NULL
+// Step2:    |a2|-->|a1|-->NULL
+// Step3:    |a3|-->|a2|-->|a1|-->NULL
 // ==========================================================
 
 void createList( node_t** head, int length ){
