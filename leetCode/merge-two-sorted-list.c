@@ -27,11 +27,11 @@ void addNode( node_t **head, int newValue ){
 
 void printList( node_t *head ){
 
-   node_t *curr = head;
+   node_t *cur = head;
 
-   while( curr != NULL ){
-      printf("%2d ", curr->value);
-      curr = curr->next;
+   while( cur != NULL ){
+      printf("%2d ", cur->value);
+      cur = cur->next;
    }
    printf("\n");
 }
@@ -40,12 +40,12 @@ void printList( node_t *head ){
 
 void freeList( node_t **head ){
 
-   node_t *curr = *head;
+   node_t *cur = *head;
 
-   while( curr != NULL ){
-      node_t *next = curr->next;
-      free(curr);
-      curr = next;
+   while( cur != NULL ){
+      node_t *next = cur->next;
+      free(cur);
+      cur = next;
    }
 }
 //=====================================================
@@ -84,27 +84,27 @@ void freeList( node_t **head ){
 //=====================================================
 void mergeSortedList( node_t **list1, node_t **list2, node_t **list3 )
 {
-   node_t *curr1 = *list1;
-   node_t *curr2 = *list2;
+   node_t *cur1 = *list1;
+   node_t *cur2 = *list2;
 
 
-   while ( curr1 != NULL || curr2 != NULL ){
+   while ( cur1 != NULL || cur2 != NULL ){
 
-      if ( curr1 != NULL && curr2 != NULL && ( curr1->value >= curr2->value ) ){
-         addNode( list3, curr2->value );
-         curr2 = curr2->next;
+      if ( cur1 != NULL && cur2 != NULL && ( cur1->value >= cur2->value ) ){
+         addNode( list3, cur2->value );
+         cur2 = cur2->next;
       }
-      else if ( curr1 != NULL && curr2 != NULL && ( curr1->value < curr2->value ) ){
-         addNode( list3, curr1->value );
-         curr1 = curr1->next;
+      else if ( cur1 != NULL && cur2 != NULL && ( cur1->value < cur2->value ) ){
+         addNode( list3, cur1->value );
+         cur1 = cur1->next;
       }
-      else if ( curr1 == NULL && curr2 != NULL ){
-         addNode( list3, curr2->value );
-         curr2 = curr2->next;
+      else if ( cur1 == NULL && cur2 != NULL ){
+         addNode( list3, cur2->value );
+         cur2 = cur2->next;
       }
-      else if ( curr2 == NULL && curr1 != NULL ){
-         addNode( list3, curr1->value );
-         curr1 = curr1->next;
+      else if ( cur2 == NULL && cur1 != NULL ){
+         addNode( list3, cur1->value );
+         cur1 = cur1->next;
       }
       else { printf("something wrong!\n"); exit(0); }
 
