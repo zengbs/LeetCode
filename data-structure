@@ -1,21 +1,22 @@
+# https://leetcode.com/problemset/all/
+
 array
 linked list
-XOR linked list
 stack
 queue
 heap
 recursion
 binary search
 
-Tree
-binary tree
-max-tree
-binary search tree
-trie
-red-black tree
-B-tree
+tree
+-- binary tree
+-- max-tree
+-- binary search tree
+-- trie
+-- red-black tree
+-- B-tree
 
-Graph
+graph
 -- bfs
 -- dfs
 -- topological sort
@@ -29,7 +30,7 @@ sortings
 -- shell sort
 -- tree sort
 
-Linear-time sorting
+linear-time sorting
 -- counting sort
 -- Bucket sort
 -- Radix sort

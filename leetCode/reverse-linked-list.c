@@ -58,32 +58,21 @@ void reverseList( node_t** head ){
    *head = prev;
 }
 
+
+
 // ==========================================================
 //           head
 // Step1:    |a1|-->NULL
 // Step2:    |a2|-->|a1|-->NULL
 // Step3:    |a3|-->|a2|-->|a1|-->NULL
 // ==========================================================
-
-void createList( node_t** head, int length ){
-
-    int value = 0;
-    int leng = 0;
-
-    (*head) = (node_t*)malloc(sizeof(node_t));
-
-    (*head)->next = NULL;
-    (*head)->value = value++;
-
-    while ( leng < length-1 ){
-       node_t* curr = (node_t*)malloc(sizeof(node_t));
-       curr->value = value++;
-       curr->next  = *head;
-       *head = curr;
-       leng++;
-    }
-
+void addNode( node_t **head, int newValue ){
+   node_t* newNode = (node_t*)malloc(sizeof(node_t));
+   newNode->next = *head;
+   newNode->value = newValue;
+   *head = newNode;
 }
+
 
 
 void printList( node_t* head )
@@ -111,10 +100,12 @@ void freeList( node_t** head )
    }
 }
 
+
+
 int main()
 {
    node_t *head = NULL;
-   createList(&head, 10);
+   for (int i=0;i<10;i++) addNode( &head, i );
    printList(head);
    reverseList(&head);
    printList(head);
