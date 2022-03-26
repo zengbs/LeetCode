@@ -1,3 +1,7 @@
+// TAG: linked list
+// TITLE: Middle of the Linked List
+// LEVEL: easy
+
 #include <stdio.h>
 #include <stdlib.h>
 
