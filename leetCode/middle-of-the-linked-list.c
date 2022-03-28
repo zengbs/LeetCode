@@ -40,6 +40,7 @@ node_t *middleList(node_t *head){
 
    int length = 0;
 
+   // count the length of list
    while( curr != NULL ){
       length++;
       curr = curr->next;
@@ -47,6 +48,7 @@ node_t *middleList(node_t *head){
 
    int middleIdx = 0;
 
+   // compute the index of the middle node
    if ( length%2 != 0 ){
       middleIdx = (length+1)/2;
    }
@@ -59,6 +61,7 @@ node_t *middleList(node_t *head){
 
    curr = head;
 
+   // get the middle node
    while( idx < middleIdx ){
       idx++;
       curr = curr->next;

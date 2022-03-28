@@ -1,6 +1,13 @@
+// TITLE: palindrome linked list
+// TAG: stack, reverse linked list, recursion
+// LEVEL: easy
+
+// https://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+
 
 
 struct node_s{
