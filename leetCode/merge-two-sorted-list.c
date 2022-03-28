@@ -88,7 +88,7 @@ void freeList( node_t *head ){
 //           *result =            *last = NULL
 //                               **last =
 //-----------------------------------------------------
-// Step 2: *last = &|2|
+// Step 2: *last = &|2| (i.e. result = &|2|)
 //
 //         result
 //           last      a
@@ -119,7 +119,7 @@ void freeList( node_t *head ){
 //           *result =  |2|        *last =   |2|->next
 //                                **last =   NULL
 //-----------------------------------------------------
-// Step 4: *last = &|3|
+// Step 4: *last = &|3| (i.e. |2|->next = |3|)
 //
 //        result        a
 //           |2|       |8|--> NULL
@@ -146,7 +146,7 @@ void freeList( node_t *head ){
 //           *result =  |2|        *last =   |3|->next
 //                                **last =   NULL
 //-----------------------------------------------------
-// Step 6: *last = &|7|
+// Step 6: *last = &|7| (i.e. |3|->next = |7|)
 //
 //        result    a
 //           |2|   |8|--> NULL
@@ -172,7 +172,7 @@ void freeList( node_t *head ){
 //           *result =  |2|        *last =   |7|->next
 //                                **last =   NULL
 //-----------------------------------------------------
-// Step 8: *last = &|8|
+// Step 8: *last = &|8| (i.e. |7|->next = |8|)
 //
 //                 NULL
 //                  ↑
