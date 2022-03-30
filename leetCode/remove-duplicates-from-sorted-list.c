@@ -1,3 +1,7 @@
+// TITLE: Remove Duplicates from Sorted List
+// TAG: linked list
+// LEVEL: easy
+
 #include <stdio.h>
 #include <stdlib.h>
 
