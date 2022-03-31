@@ -7,13 +7,7 @@
 // ============================================================================
 #include <stdio.h>
 #include <stdlib.h>
-
-struct node_s{
-  int value;
-  struct node_s* next;
-};
-
-typedef struct node_s node_t;
+#include "include/linkedList.h"
 
 
 // ==========================================================
@@ -62,47 +56,6 @@ node_t* reverseList( node_t* head ){
 
 
 
-// ==========================================================
-//           head
-// Step1:    |a1|-->NULL
-// Step2:    |a2|-->|a1|-->NULL
-// Step3:    |a3|-->|a2|-->|a1|-->NULL
-// ==========================================================
-void addNode( node_t **head, int newValue ){
-   node_t* newNode = (node_t*)malloc(sizeof(node_t));
-   newNode->next = *head;
-   newNode->value = newValue;
-   *head = newNode;
-}
-
-
-
-void printList( node_t* head )
-{
-    node_t *curr = head;
-
-    while( curr != NULL ){
-       printf("%d ", curr->value);
-       curr = curr->next;
-    }
-    printf("\n");
-}
-
-
-
-void freeList( node_t** head )
-{
-  node_t *curr = *head;
-  node_t *next;
-
-   while( curr != NULL ){
-      next = curr->next;
-      free(curr);
-      curr = next;
-   }
-}
-
-
 
 int main()
 {
@@ -113,7 +66,7 @@ int main()
    head = reverseList(head);
 
    printList(head);
-   freeList(&head);
+   freeList(head);
 
    return 0;
 }

@@ -4,14 +4,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "include/linkedList.h"
 
 
-struct node_s{
-   int value;
-   struct node_s *next;
-};
-
-typedef struct node_s node_t;
 
 //========================================================
 // c  : curr
@@ -69,30 +64,6 @@ void deleteDuplicates(node_t *head)
       }
    }
 
-}
-
-
-
-void printList( node_t *head )
-{
-   node_t *curr = head;
-
-   while( curr ){
-      printf("%d ", curr->value);
-      curr = curr->next;
-   }
-   printf("\n");
-}
-
-void addNode(  node_t **head, int value )
-{
-   node_t *newNode = (node_t*)malloc(sizeof(node_t));
-
-
-   newNode->value = value;
-   newNode->next = *head;
-
-   *head = newNode;
 }
 
 

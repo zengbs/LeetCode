@@ -5,24 +5,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "tools.h"
+#include "include/tools.h"
+#include "include/linkedList.h"
 
 
-struct node_s{
-   int value;
-   struct node_s *next;
-};
-
-typedef struct node_s node_t;
-
-
-
-void addNode( node_t **head, int newValue ){
-   node_t* newNode = (node_t*)malloc(sizeof(node_t));
-   newNode->next = *head;
-   newNode->value = newValue;
-   *head = newNode;
-}
 
 
 //===============================================
@@ -52,29 +38,7 @@ void moveNode( node_t **src, node_t **det ){
    *det = curr;
 }
 
-void printList( node_t *head ){
 
-   node_t *cur = head;
-
-   while( cur != NULL ){
-      printf("%2d ", cur->value);
-      cur = cur->next;
-   }
-   printf("\n");
-}
-
-
-
-void freeList( node_t *head ){
-
-   node_t *cur = head;
-
-   while( cur != NULL ){
-      node_t *next = cur->next;
-      free(cur);
-      cur = next;
-   }
-}
 
 //=====================================================
 // Step 1:
