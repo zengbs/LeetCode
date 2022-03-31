@@ -4,19 +4,19 @@
 
 // https://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/
 
+//                                   time    space
+// METHOD 1 (use a Stack)            O(n)
+// METHOD 2 (by reversing the list)  O(n)     O(1)
+// METHOD 3 (use Recursion)          O(n)     O(n)
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "include/linkedList.h"
 
 
-
-struct node_s{
-   int value;
-   struct node_s *next;
-};
-
-typedef struct node_s node_t;
-
+// |a|-->|b|-->|c|-->|b|-->|a|
+// |a|-->|b|-------->|b|-->|a|
 
 bool isPalindrome( node_t *head )
 {
@@ -24,28 +24,6 @@ bool isPalindrome( node_t *head )
 
 }
 
-void addNode( node_t **head, int value )
-{
-   node_t *newNode = (node_t*)malloc(sizeof(node_t));
-
-   newNode->value = value;
-
-   newNode->next  = *head;
-
-   *head = newNode;
-}
-
-
-void printList( node_t *head )
-{
-   node_t *curr = head;
-
-   while( curr != NULL ){
-      printf("%d ", curr->value);
-      curr = curr->next;
-   }
-   printf("\n");
-}
 
 int main(){
 

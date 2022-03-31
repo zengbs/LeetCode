@@ -4,44 +4,36 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 #include "include/linkedList.h"
 
+// Using fast and slow pointers
 
+
+// |a|-->|b|-->|c|-->|d|-->|e|
+// |a|-->|b|-->|c|-->|d|
 
 node_t *middleList(node_t *head){
 
-   node_t *curr = head;
+   node_t *slow = head;
+   node_t *fast = head;
 
-   int length = 0;
+   int fastSteps = 0;
 
-   // count the length of list
-   while( curr != NULL ){
-      length++;
-      curr = curr->next;
-   }
+   //  The stop criteria should nnot be fast != NULL
+   while( fast->next != NULL ){
 
-   int middleIdx = 0;
+      fast = fast->next;
 
-   // compute the index of the middle node
-   if ( length%2 != 0 ){
-      middleIdx = (length+1)/2;
-   }
-   else{
-      middleIdx = length/2+1;
+      fastSteps++;
+
+      if ( fastSteps%2 == 0 ) slow = slow->next;
 
    }
 
-   int idx = 1;
 
-   curr = head;
-
-   // get the middle node
-   while( idx < middleIdx ){
-      idx++;
-      curr = curr->next;
-   }
-
-   return curr;
+   if ( fastSteps%2 == 0 ) return slow;
+   else                    return slow->next;
 }
 
 
@@ -49,9 +41,12 @@ int main(){
 
    node_t *head = NULL;
 
-   for (int i=25; i>=2; i-=3) addNode(&head, i);
+   addNode(&head, 5);
+   addNode(&head, 4);
+   addNode(&head, 3);
+   addNode(&head, 2);
+   addNode(&head, 1);
 
-   printList(head);
 
    node_t *middleNode = middleList( head );
 
