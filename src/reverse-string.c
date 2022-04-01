@@ -6,9 +6,9 @@ void swapChar(char *x, char *y)
 {
   if (x != y)
   {
-    *x ^= *y;
     *y ^= *x;
     *x ^= *y;
+    *y ^= *x;
   }
 }
 
@@ -34,7 +34,7 @@ void reverseString( char s[] ){
 
 int main(){
 
-  char s[] = "1234567";
+  char s[] = "12345678";
 
   printf("%s\n", s);
 
