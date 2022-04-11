@@ -1,16 +1,14 @@
 #include<stdio.h>
 
-
-
-void swapChar(char *x, char *y)
+void swapChar( char *x, char *y )
 {
-  if (x != y)
-  {
-    *y ^= *x;
-    *x ^= *y;
-    *y ^= *x;
-  }
+   if ( x != y ){
+      *x ^= *y;
+      *y ^= *x;
+      *x ^= *y;
+   }
 }
+
 
 
 void reverseString( char s[] ){
@@ -34,7 +32,7 @@ void reverseString( char s[] ){
 
 int main(){
 
-  char s[] = "12345678";
+  char s[] = "abcdefghijklmn";
 
   printf("%s\n", s);
 
