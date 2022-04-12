@@ -21,13 +21,12 @@ node_t *middleList(node_t *head){
    int fastSteps = 0;
 
    //  The stop criteria should nnot be fast != NULL
-   while( fast->next != NULL ){
+   while( fast->next != NULL && fast->next->next != NULL ){
 
-      fast = fast->next;
+      fast = fast->next->next;
+      slow = slow->next;
 
       fastSteps++;
-
-      if ( fastSteps%2 == 0 ) slow = slow->next;
 
    }
 
@@ -42,13 +41,16 @@ int main(){
    node_t *head = NULL;
 
    addNode(&head, 5);
+   addNode(&head, 5);
    addNode(&head, 4);
    addNode(&head, 3);
    addNode(&head, 2);
    addNode(&head, 1);
 
+   printList(head);
 
    node_t *middleNode = middleList( head );
+
 
    printf( "%d\n" , middleNode->value );
 
