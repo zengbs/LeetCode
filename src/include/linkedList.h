@@ -13,6 +13,8 @@ typedef struct node_s node_t;
 
 void printList( node_t *head )
 {
+   if ( head == NULL ) { printf("\n"); return; }
+
    node_t *curr = head;
 
    while( curr ){
