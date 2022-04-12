@@ -4,31 +4,16 @@
 #include "include/tools.h"
 
 
+//=======================================
 // |a|-->|b|-->|c|-->|d|
-// |a|---|c|-------->|d|
-
+// |a|-->|c|-->|c|-->|d|
+// |a|-->|c|-------->|d|
+//=======================================
 void deleteNode( node_t *node ){
-
-   if ( node->next == NULL ){
-
-      //free(node);
-      node = NULL;
-
-   }
-   else if ( node->next->next == NULL ){
-
-      node->value = node->next->value;
-      free(node->next);
-      node->next = NULL;
-
-   }
-   else{
-
-      node->value = node->next->value;
-      node_t *next = node->next;
-      node->next  = node->next->next;
-      free(next);
-   }
+   node->value = node->next->value;
+   node_t *next = node->next;
+   node->next  = node->next->next;
+   free(next);
 }
 
 
@@ -40,7 +25,7 @@ int main(){
 
    printList(head);
 
-   deleteNode( head->next->next->next->next );
+   deleteNode( head->next->next->next );
 
    printList(head);
 
