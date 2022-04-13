@@ -27,11 +27,7 @@ void moveNode( node_t **src, node_t **det ){
 
    node_t *curr = *src;
 
-   CHECK_NULL(*src);
-
    *src = (*src)->next;
-
-   CHECK_NULL(curr);
 
    curr->next = *det;
 
@@ -164,7 +160,7 @@ void moveNode( node_t **src, node_t **det ){
 //           *result =  |2|        *last =   |8|->next
 //                                **last =   NULL
 //=====================================================
-node_t* mergeSortedList( node_t *a, node_t *b )
+node_t* mergeSortedList1( node_t *a, node_t *b )
 {
    node_t *result = NULL;
    node_t **last = &result;
@@ -196,6 +192,66 @@ node_t* mergeSortedList( node_t *a, node_t *b )
 }
 
 
+//=====================================================
+// Step 1:
+//                a
+//               |2|-->|8|--> NULL
+//
+//               |3|-->|7|--> NULL
+//                b
+//
+//   |d|-->|N|
+//    t   t->next
+//-----------------------------------------------------
+// Step 2:
+//          t  t->next  a
+//         |d|-->|2|   |8|--> NULL
+//                |
+//               |N|
+//
+//               |3|-->|7|--> NULL
+//                b
+//
+//-----------------------------------------------------
+// Step 3:
+//                t     a
+//         |d|-->|2|   |8|--> NULL
+//                |
+//               |N|
+//
+//               |3|-->|7|--> NULL
+//                b
+//
+//-----------------------------------------------------
+//=====================================================
+
+node_t* mergeSortedList2( node_t *a, node_t *b )
+{
+   node_t dummy, *tail;
+
+   tail = &dummy;
+
+   dummy.next = NULL;
+
+
+   while ( 1 ){
+
+      if ( a == NULL ) { tail->next = b; break; }
+      if ( b == NULL ) { tail->next = a; break; }
+
+      if ( a->value <= b->value )
+         moveNode( &a, &(tail->next) );
+      else
+         moveNode( &b, &(tail->next) );
+
+      tail = tail->next;
+
+   }
+
+   return dummy.next;
+}
+
+
 int main(){
 
    // create list 1
@@ -210,7 +266,7 @@ int main(){
 
    // merge sorted list
    node_t *list3 = NULL;
-   list3 = mergeSortedList( list1, list2 );
+   list3 = mergeSortedList2( list1, list2 );
 
    // print result
    printList(list3);
