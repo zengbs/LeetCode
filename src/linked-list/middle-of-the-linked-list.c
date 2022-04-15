@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
-#include "include/linkedList.h"
+#include "../include/linkedList.h"
 
 // Using fast and slow pointers
 

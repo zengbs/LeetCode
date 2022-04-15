@@ -5,7 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "include/linkedList.h"
+#include "../include/linkedList.h"
 
 
 node_t *removeNthFromEnd( node_t *head, int NthNodeFromEnd )

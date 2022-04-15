@@ -5,8 +5,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "include/tools.h"
-#include "include/linkedList.h"
+#include "../include/tools.h"
+#include "../include/linkedList.h"
 
 
 

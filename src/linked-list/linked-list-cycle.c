@@ -6,8 +6,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include "include/linkedList.h"
-#include "include/tools.h"
+#include "../include/linkedList.h"
+#include "../include/tools.h"
 
 bool hasCycle(node_t *head) {
 
