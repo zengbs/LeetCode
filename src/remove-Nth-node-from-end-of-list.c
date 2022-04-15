@@ -1,6 +1,6 @@
 // TITLE: Remove Nth Node From End of List
 // TAG: linked-list, fast-slow-pointers, dummy-node
-// LEEVEL: medium
+// LEVEL: medium
 
 
 #include <stdio.h>
@@ -21,6 +21,7 @@ node_t *removeNthFromEnd( node_t *head, int NthNodeFromEnd )
       fast = fast->next;
    }
 
+   // advance fast and slow pointers simultaneously
    while( fast ){
       fast = fast->next;
       slow = slow->next;
