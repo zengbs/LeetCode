@@ -34,7 +34,6 @@ void addNode(  node_t **head, int value )
 {
    node_t *newNode = (node_t*)malloc(sizeof(node_t));
 
-
    newNode->value = value;
    newNode->next = *head;
 

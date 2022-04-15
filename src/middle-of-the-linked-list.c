@@ -1,4 +1,4 @@
-// TAG: linked list
+// TAG: linked list, fast-slow pointers
 // TITLE: Middle of the Linked List
 // LEVEL: easy
 
