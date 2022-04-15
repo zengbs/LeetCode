@@ -1,5 +1,5 @@
 // TITLE: Remove Nth Node From End of List
-// TAG: linked-list
+// TAG: linked-list, fast-slow-pointers, dummy-node
 // LEEVEL: medium
 
 
@@ -10,7 +10,26 @@
 
 node_t *removeNthFromEnd( node_t *head, int NthNodeFromEnd )
 {
+   node_t dummy;
+   dummy.next = head;
 
+   node_t *fast = &dummy;
+   node_t *slow = &dummy;
+
+   // advance fast pointer by NthNodeFromEnd+1 nodes
+   for (int step=0; step<NthNodeFromEnd+1; step++){
+      fast = fast->next;
+   }
+
+   while( fast ){
+      fast = fast->next;
+      slow = slow->next;
+   }
+
+   // remove Nth node from end of list
+   slow->next = slow->next->next;
+
+   return dummy.next;
 }
 
 int main(){
