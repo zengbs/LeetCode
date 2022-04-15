@@ -1,5 +1,5 @@
 // TITLE: palindrome linked list
-// TAG: stack, reverse linked list, recursion, fast-slow pointers
+// TAG: stack, reverse-linked-list, recursion, fast-slow-pointers
 // LEVEL: easy
 
 // https://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/

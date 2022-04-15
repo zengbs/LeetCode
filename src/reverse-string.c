@@ -1,3 +1,7 @@
+// TITLE: reverse string
+// TAG: string
+// LEVEL: easy
+
 #include<stdio.h>
 
 void swapChar( char *x, char *y )

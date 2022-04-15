@@ -1,5 +1,5 @@
-// TAG: linked list, recursion
 // TITLE: reverse linked list
+// TAG: linked-list, recursion
 // LEVEL: easy
 
 // ============================================================================

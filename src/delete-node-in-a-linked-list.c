@@ -1,7 +1,12 @@
+// TITLE: Delete Node in a Linked List
+// TAG: linked-list
+// LEVEL: easy
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "include/linkedList.h"
 #include "include/tools.h"
+
 
 
 //=======================================

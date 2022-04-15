@@ -1,5 +1,5 @@
-// TAG: linked list, fast-slow pointers
 // TITLE: Middle of the Linked List
+// TAG: linked-list, fast-slow-pointers
 // LEVEL: easy
 
 #include <stdio.h>

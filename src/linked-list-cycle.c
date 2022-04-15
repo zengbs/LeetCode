@@ -1,4 +1,6 @@
-// TAG: linked-list, fast-slow pointers
+// TITLE: Linked List Cycle
+// TAG: linked-list, fast-slow-pointers
+// LEVEL: easy
 
 
 #include <stdio.h>

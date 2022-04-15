@@ -1,4 +1,7 @@
-// TAG: linked-list, fast-slow pointers
+// TITLE: Linked List Cycle II
+// TAG: linked-list, fast-slow-pointers
+// LEVEL: medium
+// Reference: https://ithelp.ithome.com.tw/articles/10223721
 
 #include <stdio.h>
 #include <stdbool.h>

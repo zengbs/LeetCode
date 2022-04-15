@@ -1,5 +1,5 @@
 // TITLE: merge sorted linked list
-// TAG:   linked list, dummy node
+// TAG:   linked-list, dummy-node
 // LEVEL: easy
 // https://www.geeksforgeeks.org/merge-two-sorted-linked-lists/
 

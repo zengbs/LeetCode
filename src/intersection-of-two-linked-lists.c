@@ -1,3 +1,7 @@
+// TITLE: Intersection of Two Linked Lists
+// TAG: linked-list
+// LEVEL: easy
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "include/tools.h"

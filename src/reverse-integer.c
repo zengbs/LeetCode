@@ -1,5 +1,5 @@
 // TITLE: reverse integer
-// TAG: array stack reverse integer
+// TAG: array, stack, reverse, integer
 // LEVEL: easy
 
 // https://www.geeksforgeeks.org/reverse-digits-integer-overflow-handled

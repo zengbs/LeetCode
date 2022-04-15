@@ -1,4 +1,6 @@
-// TAG: dummy node
+// TITLE: Remove Linked List Elements
+// TAG: linked-list, dummy-node
+// LEVEL: easy
 
 #include <stdio.h>
 #include <stdbool.h>
