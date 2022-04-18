@@ -34,9 +34,25 @@ void xorSwap( int *a, int *b ){
 //                l  r
 // ------------------p-----------------------------------
 // 0  3 -1  1  2  1  4  7  8  9  5
+//
 //                r  l
 
 
+//       p
+// 0 1 2 3 4 5 6
+// l           r
+//       lr
+//     r   l
+// -----------------
+//   p
+// 0 1 2 3 4 5 6
+// l     r
+//   lr
+// r   l
+// -----------------
+//     p
+// 0 1 2 3 4 5 6
+//
 int partition(int *arr, int l, int r)
 {
    int pivot = arr[(l+r)/2]; // pick pivot point
@@ -51,10 +67,13 @@ int partition(int *arr, int l, int r)
       // but stop at the element that should be on left
       while (arr[r] > pivot) r--;
 
+      // is the order of `l++` and `r--` important?
+
       // swap elements, and move left and right indices
       if ( l <= r )  xorSwap(&arr[l++], &arr[r--]);
    }
 
+   // why return l?
    return l;
 }
 
@@ -71,8 +90,7 @@ void QuickSort(int *arr, int l, int r)
 
 
 int main() {
-
-    int arr[] = {0,3,-1,1,2,4,1,7,8,9,5};
+    int arr[] = {0,1,2,3,4,5,6};
     int n = sizeof(arr)/sizeof(arr[0]);
     printf("original:\n");
     printArray(arr, n);
