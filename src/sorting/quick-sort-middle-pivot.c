@@ -2,7 +2,7 @@
 #include <math.h>
 #include "../include/array.h"
 
-//#define DEBUG
+#define DEBUG
 
 void xorSwap( int *a, int *b ){
    if ( *a != *b ){
