@@ -1,3 +1,7 @@
+// TITLE: Third Maximum Number
+// LEVEL: easy
+// TAG: array
+
 #include<stdio.h>
 #include<limits.h>
 #include<stdint.h>

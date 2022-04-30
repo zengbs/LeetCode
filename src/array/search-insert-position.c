@@ -1,3 +1,8 @@
+// TITLE: Search Insert Position
+// TAG: array, binary search
+// LEVEL: easy
+
+
 #include<stdio.h>
 #include<stdlib.h>
 
