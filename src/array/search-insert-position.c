@@ -1,5 +1,5 @@
 // TITLE: Search Insert Position
-// TAG: array, binary search
+// TAG: array, binary-search
 // LEVEL: easy
 
 

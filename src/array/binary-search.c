@@ -1,3 +1,7 @@
+// TITLE: Binary search
+// TAG: array, binary-search
+// LEVEL: easy
+
 #include<stdio.h>
 
 
