@@ -1,3 +1,7 @@
+// TITLE: Check If N and Its Double Exist
+// TAG: hash, array
+// LEVEL: easy
+
 #include<stdio.h>
 #include<stdlib.h>
 #include "../include/tools.h"
