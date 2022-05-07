@@ -1,8 +1,14 @@
 #include<stdio.h>
+#include<stdlib.h>
+#include "../include/tools.h"
+
+# define HASH_TABLE_SIZE 100
+
+
 
 struct node_s{
    int value;
-   nosd_t *next;
+   struct node_s *next;
 };
 
 
@@ -15,51 +21,99 @@ void addNode(node_t **head, int value){
 
    newHead->value = value;
 
-   newHead->next = head;
+   newHead->next = *head;
 
    *head = newHead;
 }
 
 bool search( node_t *head, int target ){
 
-   node_t node;
+   node_t *node = head;
 
-   while( node.next != NULL ){
+   while( node != NULL ){
 
-      if (node.value == target) return true;
+      if (node->value == target) return true;
 
-      node = node.next;
-
+      node = node->next;
    }
 
    return false;
 }
 
-int hash(int input, int hashTableSize){
 
-   return output = intput % hashTableSize;
-}
 
 bool checkIfExist(int *arr, int arrSize) {
 
-   int hashTableSize = 100;
 
-   node_t  **hashTable = (node_t*)malloc(sizeof(*hashTable)*hashTableSize);
+   node_t  **hashTable = (node_t**)calloc(HASH_TABLE_SIZE, sizeof(*hashTable));
+
+   int hashedValue1, hashedValue2;
+
+   int numZero = 0;
 
    for ( int i=0;i<arrSize;i++ ){
 
-      if ( hashTable[i]->value )
+      if ( arr[i] == 0 ) {
 
+         numZero++;
+
+         if ( numZero == 2 )   return true;
+         else                  continue;
+      }
+
+      // arr[i] is even
+      if ( (arr[i]&1) == 0 ){
+         hashedValue1 = abs((arr[i]/2)%HASH_TABLE_SIZE);
+         hashedValue2 = abs((arr[i]*2)%HASH_TABLE_SIZE);
+
+         // check if arr[i]/2 exist
+         // collision
+         if ( hashTable[hashedValue1] != NULL ){
+            if ( search( hashTable[hashedValue1], arr[i]/2 ) ) return true;
+            else addNode( &hashTable[abs(arr[i]%HASH_TABLE_SIZE)], arr[i] );
+         }
+         // no collision
+         else{
+            addNode( &hashTable[abs(arr[i]%HASH_TABLE_SIZE)], arr[i] );
+         }
+
+         // check if arr[i]*2 exist
+         // collision
+         if ( hashTable[hashedValue2] != NULL ){
+            if ( search( hashTable[hashedValue2], arr[i]*2 ) ) return true;
+            else addNode( &hashTable[abs(arr[i]%HASH_TABLE_SIZE)], arr[i] );
+         }
+         // no collision
+         else{
+            addNode( &hashTable[abs(arr[i]%HASH_TABLE_SIZE)], arr[i] );
+         }
+      }
+
+      // arr[i] is odd
+      else{
+
+         hashedValue2 = abs((arr[i]*2)%HASH_TABLE_SIZE);
+
+         // check if arr[i]*2 exist
+         if ( hashTable[hashedValue2] != NULL ){ // collision
+            if ( search( hashTable[hashedValue2], arr[i]*2 ) ) return true;
+            else addNode( &hashTable[abs(arr[i]%HASH_TABLE_SIZE)], arr[i] );
+         }
+         else{ // no collision
+            addNode( &hashTable[abs(arr[i]%HASH_TABLE_SIZE)], arr[i] );
+         }
+      }
    }
 
+   return false;
 }
 
 
 int main(){
 
-   int array[7] = {5, 6, 1, -2, 0, 8, 3};
+   int array[] = {-2,0,0};
 
-   printf("%d\n", checkIfExist(array, 7));
+   printf("%d\n", checkIfExist(array, sizeof(array)/sizeof(array[0])));
 
    return 0;
 }
