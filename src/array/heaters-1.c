@@ -78,23 +78,25 @@ int binarySearch( int *heaters, int heaterSize, int housePosition ){
 int findRadius(int* houses, int housesSize, int* heaters, int heatersSize){
 
    int nearestHeaterPosition;
-   int *miniRadius = (int*)calloc(housesSize, sizeof(int));
+   int *minimumRadius = (int*)calloc(housesSize, sizeof(int));
 
+   // sorting heaters array
    quickSort( heaters, 0, heatersSize-1 );
 
+
+   // given a house position, find the nearest heater's position
    for ( int i=0;i<housesSize;i++ ){
       nearestHeaterPosition = binarySearch(heaters, heatersSize, houses[i]);
-      miniRadius[i] = abs( heaters[nearestHeaterPosition] - houses[i] );
+      minimumRadius[i] = abs( heaters[nearestHeaterPosition] - houses[i] );
    }
 
-
+   // find the maximum in minimumRadius[]
    int maxRadius = 0;
-
    for ( int i=0;i<housesSize;i++ ){
-      if ( maxRadius < miniRadius[i] ) maxRadius = miniRadius[i];
+      if ( maxRadius < minimumRadius[i] ) maxRadius = minimumRadius[i];
    }
 
-   free(miniRadius);
+   free(minimumRadius);
 
    return maxRadius;
 }
