@@ -60,7 +60,7 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
 
       int hashedTargetIdx = abs((target-nums[i])%hashTableSize);
 
-      node_t *targetNode; // Why we cannot use node_t targetNode?
+      node_t *targetNode; // Why we cannot use `node_t targetNode`?
 
       if ( search( hashTable[hashedTargetIdx], target-nums[i], &targetNode ) ){
          indice[0] = targetNode->index;
