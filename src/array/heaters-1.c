@@ -8,6 +8,11 @@
 #include <stdbool.h>
 #include <limits.h>
 
+//   x   y   x^y
+//   0   0    0
+//   0   1    1
+//   1   0    1
+//   1   1    0
 
 void swap( int *x, int *y ){
    if ( x != y ){
