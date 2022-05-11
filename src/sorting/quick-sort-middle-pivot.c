@@ -57,19 +57,16 @@ int partition(int *arr, int l, int r)
    pivot = arr[(l+r)/2]; // pick pivot point
    int pivotIdx = (l+r)/2;
 
-#  ifdef DEBUG
-   printArray(arr, r-l+1);
-   printf("r=%3d, pivotIdx=%3d, l=%3d\n", r, pivotIdx, l);
-#  endif
-
    while (l <= r){
 
-      // skip the elements that should be on left
-      // but stop at the element that should be on right
+      // increase l:
+      //    skip the elements that should be on left
+      //    but stop at the element that should be on right
       while (arr[l] < pivot) l++;
 
-      // skip the elements that should be on right
-      // but stop at the element that should be on left
+      // decrease r:
+      //    skip the elements that should be on right
+      //    but stop at the element that should be on left
       while (arr[r] > pivot) r--;
 
       // is the order of `l++` and `r--` important? no
@@ -78,12 +75,6 @@ int partition(int *arr, int l, int r)
       // `<=` is necessary, why?
       if ( l <= r )  xorSwap(&arr[l++], &arr[r--]);
    }
-
-#  ifdef DEBUG
-   printf("r=%3d, pivotIdx=%3d, l=%3d\n", r, pivotIdx, l);
-   printArray(arr, arrSize);
-   printf("=======================\n");
-#  endif
 
    // why return l? why don't return pivot+1 or r?
    return l;
