@@ -14,11 +14,17 @@ void xorSwap( int *a, int *b ){
 
 int partition(int *arr, int l, int r){
 
-   int pivot = arr[r];
+   int pivot = l + (r-l)/2;
+
+   xorSwap( &arr[pivot], &arr[r] );
+
    int i = l;
 
    for ( int j=l; j<r; j++ ){
-      if ( arr[j] < pivot )   xorSwap(&arr[i++], &arr[j]);
+      if ( arr[j] < arr[r] ){
+         xorSwap(&arr[i], &arr[j]);
+         i++;
+      }
    }
 
    xorSwap(&arr[i], &arr[r]);
