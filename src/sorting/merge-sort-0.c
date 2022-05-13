@@ -2,53 +2,51 @@
 // https://hsm.stackexchange.com/questions/12549/how-did-von-neumann-come-up-with-his-merge-sort-algorithm
 
 
-/* C program for Merge Sort */
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
 #include "../include/array.h"
 
-// merges two subarrays of arr[].
-// --> first subarray is arr[l..m]
-// --> second subarray is arr[m+1..r]
+// merge two subarrays arr[l..m] and arr[m+1..r] into arr[l..r]
 void merge(int arr[], int l, int m, int r)
 {
-   int LeftSubArry[m-l+2];
-   int RightSubArry[r-m+1];
+   int left[m-l+2];
+   int right[r-m+1];
 
-   // copy arr[l...m] to LeftSubArry[]
-   for( int i=0; i<m-l+1; i++ )   LeftSubArry[i] = arr[l+i];
+   // copy arr[l...m] to left[0..m-l]
+   for( int i=0; i<m-l+1; i++ )   left[i] = arr[l+i];
 
-   LeftSubArry[m-l+1] = INT_MAX;
 
-   // copy arr[m+1...r] to RightSubArry[]
-   for( int i=0; i<r-m; i++ )     RightSubArry[i] = arr[m+1+i];
+   // copy arr[m+1...r] to right[0..r-m-1]
+   for( int i=0; i<r-m; i++ )     right[i] = arr[m+1+i];
 
-   RightSubArry[r-m] = INT_MAX;
 
-   // create two indice for LeftSubArry[] and RightSubArry[]
-   int idxLeft = 0;
-   int idxRight = 0;
+   // append INT_MAX to left[] and right[]
+   left[m-l+1] = INT_MAX; right[r-m] = INT_MAX;
+
+
+   // create two indice for left[] and right[]
+   int subl = 0;
+   int subr = 0;
 
    for( int i=l; i<=r; i++ ){
-      if ( LeftSubArry[idxLeft] < RightSubArry[idxRight] )  arr[i] = LeftSubArry[idxLeft++];
-      else                                                  arr[i] = RightSubArry[idxRight++];
+      if ( left[subl] < right[subr] )  arr[i] = left[subl++];
+      else                             arr[i] = right[subr++];
    }
 }
 
-
+// arr[l..r]
 void mergeSort(int arr[], int l, int r)
 {
-   if (l < r) {
+   if ( r <= l ) return;
 
-      // same as (l+r)/2, but avoids overflow for large l and h
-      int m = l + (r - l) / 2;
+   // same as (l+r)/2, but avoids overflow for large l and h
+   int m = l + (r - l) / 2;
 
-      // sort first and second halves
-      mergeSort(arr, l, m);
-      mergeSort(arr, m + 1, r);
-      merge(arr, l, m, r);
-   }
+   // sort first and second halves
+   mergeSort(arr, l, m);
+   mergeSort(arr, m + 1, r);
+   merge(arr, l, m, r);
 }
 
 
@@ -68,7 +66,7 @@ int main()
    return 0;
 }
 
-
+// Call stack:
 //                       [(1  2  3)(4  5)]
 //                       merge(0, 2, 4)      0  2  4
 //                       [(1  4  5)(2  3)]
