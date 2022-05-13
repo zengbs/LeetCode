@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <time.h>
 #include "../include/array.h"
 
 // merge two subarrays arr[l..m] and arr[m+1..r] into arr[l..r]
@@ -42,7 +43,7 @@ void mergeSort(int arr[], int l, int r)
    // base case
    if ( r <= l ) return;
 
-   // prevent overflow
+   // round m downward
    int m = l + (r - l) / 2;
 
    // split into left subarray
@@ -55,21 +56,41 @@ void mergeSort(int arr[], int l, int r)
    merge(arr, l, m, r);
 }
 
+int compare (const void * a, const void * b)
+{
+  return ( *(int*)a - *(int*)b );
+}
+
 
 
 int main()
 {
-   int arr[] = { 5, 1, 4, 3, 2 };
-   int arr_size = sizeof(arr) / sizeof(arr[0]);
 
-   printf("Given array is \n");
-   printArray(arr, arr_size);
+  int arrSize = 30000;
 
-   mergeSort(arr, 0, arr_size - 1);
+   int *array     = (int*)malloc(arrSize*sizeof(int));
+   int *array_ref = (int*)malloc(arrSize*sizeof(int));
 
-   printf("\nSorted array is \n");
-   printArray(arr, arr_size);
+   srand(time(NULL));
+
+   for ( int i=0;i<arrSize;i++ ){
+      array[i] = rand();
+      array_ref[i] = array[i];
+   }
+
+   mergeSort(array, 0, arrSize-1);
+   qsort (array_ref, arrSize, sizeof(int), compare);
+
+   for ( int i=0;i<arrSize;i++ ){
+      if ( array_ref[i] != array[i] ){
+         printf("Fail!\n");
+         return 0;
+      }
+   }
+
+   printf("Pass!\n");
    return 0;
+
 }
 
 // Call stack:
