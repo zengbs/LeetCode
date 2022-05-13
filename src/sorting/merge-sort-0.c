@@ -10,8 +10,8 @@
 // merge two subarrays arr[l..m] and arr[m+1..r] into arr[l..r]
 void merge(int arr[], int l, int m, int r)
 {
-   int left[m-l+2];
-   int right[r-m+1];
+   int left[m-l+2];  // m-(l-1)+1
+   int right[r-m+1]; // r-m+1
 
    // copy arr[l...m] to left[0..m-l]
    for( int i=0; i<m-l+1; i++ )   left[i] = arr[l+i];
@@ -35,17 +35,23 @@ void merge(int arr[], int l, int m, int r)
    }
 }
 
-// arr[l..r]
+
+// split arr[l..r] into arr[l..m] and arr[m+1..r]
 void mergeSort(int arr[], int l, int r)
 {
+   // base case
    if ( r <= l ) return;
 
-   // same as (l+r)/2, but avoids overflow for large l and h
+   // prevent overflow
    int m = l + (r - l) / 2;
 
-   // sort first and second halves
+   // split into left subarray
    mergeSort(arr, l, m);
+
+   // split into right subarray
    mergeSort(arr, m + 1, r);
+
+   // merge subsrrays
    merge(arr, l, m, r);
 }
 

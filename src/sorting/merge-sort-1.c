@@ -1,6 +1,4 @@
-// http://alrightchiu.github.io/SecondRound/comparison-sort-merge-sorthe-bing-pai-xu-fa.html
-// https://hsm.stackexchange.com/questions/12549/how-did-von-neumann-come-up-with-his-merge-sort-algorithm
-
+// https://youtu.be/KAgkvtKMbwY
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -36,12 +34,19 @@ void merge(int arr[], int l, int m, int r)
 // arr[l,...,r-1]
 void mergeSort(int arr[], int l, int r)
 {
+   // base case
    if ( r-1 <= l ) return;
 
+   // prevent overflow
    int m = l + (r-l)/2;
 
+   // split into left subarray
    mergeSort(arr, l, m);
+
+   // split into right subarray
    mergeSort(arr, m, r);
+
+   // merge subsrrays
    merge( arr, l, m, r );
 }
 
