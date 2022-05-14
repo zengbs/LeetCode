@@ -1,9 +1,7 @@
 // TITLE: sort list
-// TAG: sorting, linked-list
+// TAG: sorting, linked-list, merge-sort
 // LEVEL: medium
 
-// https://youtu.be/KAgkvtKMbwY
-// https://hackmd.io/@kenjin/HksBkpUHr
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,6 +15,16 @@ struct node_s {
 
 typedef struct node_s node_t;
 
+void printList( node_t *head ){
+
+   node_t *node = head;
+
+   while( node != NULL ){
+      printf("%d ", node->value);
+      node = node->next;
+   }
+   printf("\n");
+}
 
 void addNode( node_t **head, int value ){
 
@@ -29,26 +37,135 @@ void addNode( node_t **head, int value ){
 }
 
 
-// Even number of nodes: return the left middle node
+// Even number of nodes: return the right middle node
 // Odd number of nodes: return the middle node
-node_t getMiddleNode( node_t *head ){
 
+//-------------------------------------------------
+// a-b-c-d-e      ==> a-b-N & c-d-e-N
+// o
+//   s f
+//     s   f
+//-------------------------------------------------
+// a-b-c-d-e-f-N  ==> a-b-c-N & d-e-f-N
+// o
+//   s f
+//     s   f
+//       s     f
+//-------------------------------------------------
+// a-b-N          ==> a-N & b-N
+// o
+//   s f
+//-------------------------------------------------
+// base case
+// a-N            ==> a-N & a-N
+// o
+//-------------------------------------------------
 
-}
+void splitList( node_t **head, node_t **left, node_t **right ){
 
+   node_t *fast     = *head;
+   node_t *slow     = *head;
+   node_t *prevSlow = *head;
 
-void mergeSort( node *head ){
-
-}
-
-
-void printList( node_t *head ){
-
-   node_t node = *head;
-
-   while( node != NULL ){
-      printf("%d ", node->value);
-      node = node->next;
+   while( fast != NULL && fast->next != NULL ){
+      fast = fast->next->next;
+      prevSlow = slow;
+      slow = slow->next;
    }
-   printf("\n");
+
+   prevSlow->next = NULL;
+
+   *left  = *head;
+   *right = slow;
+}
+
+void moveNode( node_t **src, node_t **det ){
+
+   node_t *curr = *src;
+
+   *src = (*src)->next;
+
+   curr->next = *det;
+
+   *det = curr;
+}
+
+
+
+void merge( node_t **head, node_t *a, node_t *b ){
+
+   node_t dummy, *tail;
+
+   tail = &dummy;
+
+   dummy.next = NULL;
+
+
+   while ( 1 ){
+
+      if ( a == NULL ) { tail->next = b; break; }
+      if ( b == NULL ) { tail->next = a; break; }
+
+      if ( a->value <= b->value )
+         moveNode( &a, &(tail->next) );
+      else
+         moveNode( &b, &(tail->next) );
+
+      tail = tail->next;
+
+   }
+
+   *head = dummy.next;
+
+}
+
+void mergeSort( node_t **head ){
+
+   node_t *left  = NULL;
+   node_t *right = NULL;
+
+   // split list
+   splitList( head, &left, &right );
+
+   // base case
+   if ( left == right ) return;
+
+   mergeSort( &left );
+   mergeSort( &right );
+
+   merge( head, left, right );
+}
+
+
+
+
+
+int main(){
+
+   // create list
+   node_t *list = NULL;
+   addNode( &list, 5 );
+   addNode( &list, 3 );
+   addNode( &list, 1 );
+   addNode( &list, 5 );
+   addNode( &list, 9 );
+   addNode( &list, 8 );
+   addNode( &list, 99 );
+   addNode( &list, 98 );
+   addNode( &list, 101 );
+   addNode( &list, 102 );
+   addNode( &list, 54 );
+   addNode( &list, 82 );
+   addNode( &list, 64 );
+   addNode( &list, 36 );
+   printList(list);
+
+   // merge sorted list
+   mergeSort( &list );
+
+   // print result
+   printList(list);
+
+
+   return 0;
 }
