@@ -130,7 +130,10 @@ void mergeSort( node_t **head ){
    // base case
    if ( left == right ) return;
 
+   // split left sublist
    mergeSort( &left );
+
+   // split right sublist
    mergeSort( &right );
 
    merge( head, left, right );
