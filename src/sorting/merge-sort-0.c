@@ -22,16 +22,18 @@ void merge(int arr[], int l, int m, int r)
    for( int i=0; i<r-m; i++ )     right[i] = arr[m+1+i];
 
 
-   // append INT_MAX to left[] and right[]
-   left[m-l+1] = INT_MAX; right[r-m] = INT_MAX;
+   // append INT_MAX/INT_MIN to left[] and right[] if the result is in ascending/descending order
+   left[m-l+1] = INT_MIN; right[r-m] = INT_MIN;
 
 
    // create two indice for left[] and right[]
    int subl = 0;
    int subr = 0;
 
+   // if ( left[subl] > right[subr] ): descending order
+   // if ( left[subl] < right[subr] ):  ascending order
    for( int i=l; i<=r; i++ ){
-      if ( left[subl] < right[subr] )  arr[i] = left[subl++];
+      if ( left[subl] > right[subr] )  arr[i] = left[subl++];
       else                             arr[i] = right[subr++];
    }
 }
@@ -58,7 +60,7 @@ void mergeSort(int arr[], int l, int r)
 
 int compare (const void * a, const void * b)
 {
-  return ( *(int*)a - *(int*)b );
+  return ( *(int*)b - *(int*)a );
 }
 
 

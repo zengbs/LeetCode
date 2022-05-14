@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
-#include <time.h>
-#include "../include/array.h"
+#include "../../include/array.h"
 
 // merge arr[l..m-1] and arr[m..r] into arr[l..r]
 void merge(int *arr, int l, int m, int r){
@@ -19,14 +18,13 @@ void merge(int *arr, int l, int m, int r){
    // copy arr[m..r] to right[]
    for (int i=m;i<r+1;i++) right[i-m] = arr[i];
 
-   // append INT_MAX/INT_MIN to left[] and right[] if the result is in ascending/descending order
+   // append INT_MAX to left[] and right[]
    left[m-l] = INT_MAX; right[r-m+1] = INT_MAX;
 
    int subl = 0;
    int subr = 0;
 
-   // if ( left[subl] > right[subr] ): descending order
-   // if ( left[subl] < right[subr] ):  ascending order
+   // merge left[] and right[] into arr[l..r] in ascending order
    for ( int k=l; k<r+1; k++ ){
       if ( left[subl] > right[subr] )   arr[k] = right[subr++];
       else                              arr[k] = left[subl++];
@@ -53,38 +51,18 @@ void mergeSort(int *arr, int l, int r){
 }
 
 
-int compare (const void * a, const void * b)
-{
-  return ( *(int*)a - *(int*)b );
-}
 
 int main()
 {
+   int arr[] = { 5, 1, 4, 3, 2 };
+   int arr_size = sizeof(arr) / sizeof(arr[0]);
 
+   printf("Given array is \n");
+   printArray(arr, arr_size);
 
-  int arrSize = 3000;
+   mergeSort(arr, 0, arr_size - 1);
 
-   int *array     = (int*)malloc(arrSize*sizeof(int));
-   int *array_ref = (int*)malloc(arrSize*sizeof(int));
-
-   srand(time(NULL));
-
-   for ( int i=0;i<arrSize;i++ ){
-      array[i] = rand();
-      array_ref[i] = array[i];
-   }
-
-   mergeSort(array, 0, arrSize-1);
-   qsort (array_ref, arrSize, sizeof(int), compare);
-
-   for ( int i=0;i<arrSize;i++ ){
-      if ( array_ref[i] != array[i] ){
-         printf("Fail!\n");
-         return 0;
-      }
-   }
-
-   printf("Pass!\n");
+   printf("\nSorted array is \n");
+   printArray(arr, arr_size);
    return 0;
-
 }

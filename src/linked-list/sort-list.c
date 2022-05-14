@@ -3,6 +3,7 @@
 // LEVEL: medium
 
 // https://youtu.be/KAgkvtKMbwY
+// https://hackmd.io/@kenjin/HksBkpUHr
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,6 +29,19 @@ void addNode( node_t **head, int value ){
 }
 
 
+// Even number of nodes: return the left middle node
+// Odd number of nodes: return the middle node
+node_t getMiddleNode( node_t *head ){
+
+
+}
+
+
+void mergeSort( node *head ){
+
+}
+
+
 void printList( node_t *head ){
 
    node_t node = *head;
@@ -38,6 +52,3 @@ void printList( node_t *head ){
    }
    printf("\n");
 }
-
-
-

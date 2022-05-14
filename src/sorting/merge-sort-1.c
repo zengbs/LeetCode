@@ -18,13 +18,14 @@ void merge(int arr[], int l, int m, int r)
    // copy data to right subarray
    for(int i=m;i<r;i++) right[i-m] = arr[i];
 
-   // append INT_MAX to left and right subarrays (why?)
+   // append INT_MAX/INT_MIN to left[] and right[] if the result is in ascending/descending order
    left[m-l] = INT_MAX; right[r-m] = INT_MAX;
 
    int sl = 0;
    int sr = 0;
 
-   // merge two subarrays in ascending order
+   // if ( left[subl] > right[subr] ): descending order
+   // if ( left[subl] < right[subr] ):  ascending order
    for ( int k=l;k<r;k++ ){
       if ( left[sl] > right[sr] )   arr[k] = right[sr++];
       else                          arr[k] =  left[sl++];

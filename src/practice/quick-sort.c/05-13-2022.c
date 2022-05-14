@@ -62,15 +62,10 @@ int main(){
       array_ref[i] = array[i];
    }
 
-   array[0] = array_ref[0] = 2;
-   array[1] = array_ref[1] = 2;
-   array[2] = array_ref[2] = 1;
-
    quickSort(array, 0, arrSize-1);
    qsort (array_ref, arrSize, sizeof(int), compare);
 
    for ( int i=0;i<arrSize;i++ ){
-      printf("%d ", array[i]);
       if ( array_ref[i] != array[i] ){
          printf("Fail!\n");
          return 0;
