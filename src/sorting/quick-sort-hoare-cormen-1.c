@@ -42,13 +42,6 @@ int partition(int *arr, int l0, int r0)
       if ( l < r )  xorSwap(&arr[l], &arr[r]);
       else          return l;
    }
-
-
-// Question:
-// b. The indices i and j never access outside the subarray A[l..r].
-// c. When partition terminates, it returns a value j such that l ≤ j < r.
-// d. Every element of A[l..j] is less than or equal to every element of A[j+1 .. r]
-//    when partition terminates.
 }
 
 

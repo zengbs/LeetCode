@@ -40,12 +40,6 @@ int partition(int *arr, int l, int r)
    return l;
 }
 
-// Three requiements:
-// b. The indices l and r are such that we never access an element of A outside the
-//    subarray A[l0..r0].
-// c. When partition terminates, it returns a value l such that l0 < l ≤ r0.
-// d. Every element of A[l0..l-1] is less than or equal to every element of A[l .. r0]
-//    when partition terminates.
 
 // usage:  quickSort(arr, 0, arrSize-1);
 void quickSort(int *arr, int l, int r)
