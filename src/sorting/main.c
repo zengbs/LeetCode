@@ -4,7 +4,7 @@
 #include "../include/array.h"
 
 //#define MERGE_SORT
-#define QUICK_SORT
+//#define QUICK_SORT
 
 #ifdef MERGE_SORT
 void mergeSort(int arr[], int l, int r);
@@ -22,7 +22,7 @@ int compare (const void * a, const void * b)
 int main()
 {
 
-  int arrSize = 200000;
+  int arrSize = 2000;
 
    int *array     = (int*)malloc(arrSize*sizeof(int));
    int *array_ref = (int*)malloc(arrSize*sizeof(int));
@@ -39,7 +39,7 @@ int main()
    //array_ref[0] = 2;
    //array_ref[1] = 3;
 #  ifdef MERGE_SORT
-   mergeSort(array, 0, arrSize);
+   mergeSort(array, 0, arrSize-1);
 #  endif
 
 #  ifdef QUICK_SORT
