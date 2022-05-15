@@ -12,32 +12,32 @@ void xorSwap( int *a, int *b ){
 }
 
 
-int partition(int *arr, int l, int r)
+int partition(int *arr, int l0, int r0)
 {
 
    // pick an arbitrary pivot index
-   int p = (r+l)/2;
-       p = (p+l)/2;
-       p = l;
+   int p = (r0+l0)/2;
+       p = (p +l0)/2;
+       p = l0;
    int pivot = arr[p];
 
-   int i = l - 1;
-   int j = r + 1;
+   int l = l0 - 1;
+   int r = r0 + 1;
 
 
    while (1){
       //    skip the elements that should be on right
       //    but stop at the element that should be on left
-      do{ j--; } while (arr[j] > pivot);
+      do{ r--; } while (arr[r] > pivot);
 
       //    skip the elements that should be on left
       //    but stop at the element that should be on right
-      do{ i++; } while (arr[i] < pivot);
+      do{ l++; } while (arr[l] < pivot);
 
 
       // swap elements, and move left and right indices
-      if ( i < j )  xorSwap(&arr[i], &arr[j]);
-      else          return j;
+      if ( l < r )  xorSwap(&arr[l], &arr[r]);
+      else          return r;
    }
 
 
