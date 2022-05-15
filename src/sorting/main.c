@@ -22,7 +22,7 @@ int compare (const void * a, const void * b)
 int main()
 {
 
-  int arrSize = 2000;
+  int arrSize = 100000000;
 
    int *array     = (int*)malloc(arrSize*sizeof(int));
    int *array_ref = (int*)malloc(arrSize*sizeof(int));

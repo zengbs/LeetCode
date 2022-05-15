@@ -14,61 +14,53 @@ void xorSwap( int *a, int *b ){
 
 int partition(int *arr, int l, int r)
 {
+   int l0 = l;
+   int r0 = r;
+   int p = (l+r)/2; // pick an arbitrary element as a pivot
+       p = (p+r)/2;
+       p = (p+r)/2;
+       p = r;
+   int pivot = arr[p]; // pick pivot point
 
-   // pick an arbitrary pivot index
-   int pivotIdx = (r+l)/2;
-       pivotIdx = (pivotIdx+l)/2;
+   while ( l <= r ){
 
-   int pivot = arr[pivotIdx];
-
-   int i = l - 1;
-   int j = r + 1;
-
-
-   while (1){
-
-      //    skip the elements that should be on right
-      //    but stop at the element that should be on left
-      //while( arr[j] > pivot ) j--;// not works. why?
-      do{ j--; } while (arr[j] > pivot);
-
+      // increase l:
       //    skip the elements that should be on left
       //    but stop at the element that should be on right
-      //while( arr[i] < pivot ) i++;// not works
-      do{ i++; } while (arr[i] < pivot);
+      while (arr[l] < pivot) l++;
+
+      // decrease r:
+      //    skip the elements that should be on right
+      //    but stop at the element that should be on left
+      while (arr[r] > pivot) r--;
 
       // is the order of `l++` and `r--` important? no
-
       // swap elements, and move left and right indices
-      if ( i < j )  xorSwap(&arr[i], &arr[j]);
-      else          return j;
+      // `<=` is necessary, why?
+      if ( l <= r )  xorSwap(&arr[l++], &arr[r--]);
    }
 
-// Question:
-// b. The indices i and j are such that we never access an element of A outside the
-//    subarray A[l..r].
-// c. When partition terminates, it returns a value j such that l ≤ j < r.
-//    since j minus 1 two time at least
-//    since i plus  1 one time at least
-// d. Every element of A[l..j] is less than or equal to every element of A[j+1 .. r]
-//    when partition terminates.
+
+   return r;
 }
 
+// Three requiements:
+// b. The indices l and r are such that we never access an element of A outside the
+//    subarray A[l0..r0].
+// c. When partition terminates, it returns a value l such that l0 < l ≤ r0.
+// d. Every element of A[l0..l-1] is less than or equal to every element of A[l .. r0]
+//    when partition terminates.
 
 // usage:  quickSort(arr, 0, arrSize-1);
 void quickSort(int *arr, int l, int r)
 {
-
    if ( r <= l ) return;
 
    int q = partition(arr, l, r);
 
-   // step-1: sort left half
    quickSort(arr, l, q);
 
-   //step-2: sort right half
    quickSort(arr, q+1, r);
 
    // is the order of `step-1` and `step-2` important? no
 }
-

@@ -14,11 +14,13 @@ void xorSwap( int *a, int *b ){
 
 int partition(int *arr, int l, int r)
 {
-   int pivotIdx = (l+r)/2; // pick an arbitrary element as a pivot
-       pivotIdx = (pivotIdx+r)/2;
-       pivotIdx = (pivotIdx+r)/2;
-//pivotIdx = 0;
-   int pivot = arr[pivotIdx]; // pick pivot point
+   int l0 = l;
+   int r0 = r;
+   int p = (l+r)/2; // pick an arbitrary element as a pivot
+       p = (p+r)/2;
+       p = (p+r)/2;
+       p = l;
+   int pivot = arr[p]; // pick pivot point
 
    while ( l <= r ){
 
@@ -38,9 +40,16 @@ int partition(int *arr, int l, int r)
       if ( l <= r )  xorSwap(&arr[l++], &arr[r--]);
    }
 
+
    return l;
 }
 
+// Three requiements:
+// b. The indices l and r are such that we never access an element of A outside the
+//    subarray A[l0..r0].
+// c. When partition terminates, it returns a value l such that l0 < l ≤ r0.
+// d. Every element of A[l0..l-1] is less than or equal to every element of A[l .. r0]
+//    when partition terminates.
 
 // usage:  quickSort(arr, 0, arrSize-1);
 void quickSort(int *arr, int l, int r)
