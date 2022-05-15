@@ -24,19 +24,15 @@ int partition(int *arr, int l, int r)
 
    while ( l <= r ){
 
-      // increase l:
       //    skip the elements that should be on left
       //    but stop at the element that should be on right
       while (arr[l] < pivot) l++;
 
-      // decrease r:
       //    skip the elements that should be on right
       //    but stop at the element that should be on left
       while (arr[r] > pivot) r--;
 
-      // is the order of `l++` and `r--` important? no
       // swap elements, and move left and right indices
-      // `<=` is necessary, why?
       if ( l <= r )  xorSwap(&arr[l++], &arr[r--]);
    }
 
@@ -62,5 +58,4 @@ void quickSort(int *arr, int l, int r)
 
    quickSort(arr, q+1, r);
 
-   // is the order of `step-1` and `step-2` important? no
 }

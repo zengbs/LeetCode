@@ -26,19 +26,14 @@ int partition(int *arr, int l, int r)
 
 
    while (1){
-//if ( j < l || r < j ) printf("l=%d, j=%d, r=%d\n",l, j, r);
       //    skip the elements that should be on right
       //    but stop at the element that should be on left
-      //while( arr[j] > pivot ) j--;// not works. why?
       do{ j--; } while (arr[j] > pivot);
 
-//if ( i < l || r < i ) printf("l=%d, i=%d, r=%d\n",l, i, r);
       //    skip the elements that should be on left
       //    but stop at the element that should be on right
-      //while( arr[i] < pivot ) i++;// not works
       do{ i++; } while (arr[i] < pivot);
 
-      // is the order of `l++` and `r--` important? no
 
       // swap elements, and move left and right indices
       if ( i < j )  xorSwap(&arr[i], &arr[j]);
@@ -68,6 +63,5 @@ void quickSort(int *arr, int l, int r)
    //step-2: sort right half
    quickSort(arr, q, r);
 
-   // is the order of `step-1` and `step-2` important? no
 }
 
