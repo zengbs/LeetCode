@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 
+int getPivot( int *arr, int l0, int r0 );
 
 void xorSwap( int *a, int *b ){
    if ( *a != *b ){
@@ -15,11 +16,8 @@ void xorSwap( int *a, int *b ){
 int partition(int *arr, int l0, int r0)
 {
 
-   // pick an arbitrary pivot index
-   int p = (r0+l0)/2;
-       p = (p +l0)/2;
-       p = l0;
-   int pivot = arr[p];
+   // pick an arbitrary pivot except for arr[r0]
+   int pivot = getPivot( arr, l0, r0-1 );
 
    int l = l0 - 1;
    int r = r0 + 1;
