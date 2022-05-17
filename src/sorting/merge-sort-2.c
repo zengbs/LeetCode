@@ -37,6 +37,7 @@ void merge(int *arr, int l, int m, int r){
 void mergeSort(int *arr, int l, int r){
 
    if ( r <= l ) return;
+   //if ( r <= l + M ) { insetionSort(arr, l, r); return; }
 
 
    // round m upward
@@ -45,6 +46,7 @@ void mergeSort(int *arr, int l, int r){
    mergeSort( arr, l, m-1 );
    mergeSort( arr, m,   r );
 
-   merge(arr, l, m, r);
+   // do not merge two sorted arrays that arr[m-1] < arr[m]
+   if ( arr[m-1] > arr[m] ) merge(arr, l, m, r);
 
 }

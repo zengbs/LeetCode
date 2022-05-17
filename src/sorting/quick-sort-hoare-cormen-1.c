@@ -7,13 +7,7 @@
 
 int getPivot( int *arr, int l0, int r0 );
 
-void xorSwap( int *a, int *b ){
-   if ( *a != *b ){
-      *a ^= *b;
-      *b ^= *a;
-      *a ^= *b;
-   }
-}
+void xorSwap( int *a, int *b );
 
 
 int partition(int *arr, int l0, int r0)
@@ -47,6 +41,7 @@ int partition(int *arr, int l0, int r0)
 void quickSort(int *arr, int l, int r)
 {
 
+   // base case
    if ( r <= l ) return;
 
    int q = partition(arr, l, r);

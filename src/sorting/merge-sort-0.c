@@ -40,8 +40,9 @@ void mergeSort(int arr[], int l, int r)
 {
    // base case
    if ( r <= l ) return;
+   //if ( r <= l + M ) { insetionSort(arr, l, r); return; }
 
-   // round m downward
+   // round m toward zero
    int m = l + (r - l) / 2;
 
    // split into left subarray
@@ -50,6 +51,6 @@ void mergeSort(int arr[], int l, int r)
    // split into right subarray
    mergeSort(arr, m + 1, r);
 
-   // merge subsrrays
-   merge(arr, l, m, r);
+   // do not merge two sorted arrays that arr[m-1] < arr[m]
+   if ( arr[m+1] < arr[m] )   merge(arr, l, m, r);
 }

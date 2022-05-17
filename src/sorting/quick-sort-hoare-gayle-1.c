@@ -3,13 +3,7 @@
 #include <math.h>
 
 
-void xorSwap( int *a, int *b ){
-   if ( *a != *b ){
-      *a ^= *b;
-      *b ^= *a;
-      *a ^= *b;
-   }
-}
+void xorSwap( int *a, int *b );
 
 
 int partition(int *arr, int l, int r)
@@ -44,6 +38,7 @@ int partition(int *arr, int l, int r)
 // usage:  quickSort(arr, 0, arrSize-1);
 void quickSort(int *arr, int l, int r)
 {
+   // base case
    if ( r <= l ) return;
 
    int q = partition(arr, l, r);
