@@ -1,3 +1,7 @@
+// TITLE: merge intervals
+// LEVEL: medium
+// TAG: sorting, merge-intervals
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
