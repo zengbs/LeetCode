@@ -47,4 +47,3 @@ void quickSort(int *arr, int l, int r)
    quickSort(arr, q+1, r);
 
 }
-
