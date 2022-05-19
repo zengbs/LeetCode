@@ -9,8 +9,8 @@
 #include "../include/linkedList.h"
 
 
-
-
+#ifdef SOLUTION
+#define METHOD_1
 //===============================================
 //   rotate a->next
 //   src
@@ -43,6 +43,85 @@ void moveNode( node_t **src, node_t **det ){
    *det = curr;
 }
 
+
+//=====================================================
+// Step 1:
+//                a
+//               |2|-->|8|--> NULL
+//
+//               |3|-->|7|--> NULL
+//                b
+//
+//   |d|-->|N|
+//    t
+//------------ moveNode( &a, &(tail->next) ) ----------
+// Step 2:
+//                      a
+//                     |8|--> NULL
+//
+//               |3|-->|7|--> NULL
+//                b
+//
+//   |d|-->|2|-->|N|
+//    t
+//------------ tail = tail->next ----------
+// Step 3:
+//                      a
+//                     |8|--> NULL
+//
+//               |3|-->|7|--> NULL
+//                b
+//
+//   |d|-->|2|-->|N|
+//          t
+//------------ moveNode( &b, &(tail->next) ) ----------
+// Step 4:
+//                      a
+//                     |8|--> NULL
+//
+//                     |7|--> NULL
+//                      b
+//
+//   |d|-->|2|-->|3|-->|N|
+//          t
+//------------ tail = tail->next ----------
+// Step 5:
+//                      a
+//                     |8|--> NULL
+//
+//                     |7|--> NULL
+//                      b
+//
+//   |d|-->|2|-->|3|-->|N|
+//                t
+//=====================================================
+#ifdef METHOD_1
+node_t* mergeSortedList( node_t *a, node_t *b )
+{
+   node_t dummy, *tail;
+
+   tail = &dummy;
+
+   dummy.next = NULL;
+
+
+   while ( 1 ){
+
+      if ( a == NULL ) { tail->next = b; break; }
+      if ( b == NULL ) { tail->next = a; break; }
+
+      if ( a->value <= b->value )
+         moveNode( &a, &(tail->next) );
+      else
+         moveNode( &b, &(tail->next) );
+
+      tail = tail->next;
+
+   }
+
+   return dummy.next;
+}
+#endif
 
 
 //=====================================================
@@ -169,7 +248,8 @@ void moveNode( node_t **src, node_t **det ){
 //           *result =  |2|        *last =   |8|->next
 //                                **last =   NULL
 //=====================================================
-node_t* mergeSortedList1( node_t *a, node_t *b )
+#ifdef METHOD_2
+node_t* mergeSortedList( node_t *a, node_t *b )
 {
    node_t *result = NULL;
    node_t **last = &result;
@@ -199,143 +279,8 @@ node_t* mergeSortedList1( node_t *a, node_t *b )
 
    return result;
 }
-
-
-//=====================================================
-// Step 1:
-//                a
-//               |2|-->|8|--> NULL
-//
-//               |3|-->|7|--> NULL
-//                b
-//
-//   |d|-->|N|
-//    t
-//------------ moveNode( &a, &(tail->next) ) ----------
-// Step 2: rotate |2|->next and move |a| forward
-//          t           a
-//         |d|   |2|   |8|--> NULL
-//          |     ↓
-//           --->|N|
-//
-//               |3|-->|7|--> NULL
-//                b
-//------------ moveNode( &a, &(tail->next) ) ----------
-// Step 3: move tail->next backward
-//          t           a
-//         |d|-->|2|   |8|--> NULL
-//                ↓
-//               |N|
-//
-//               |3|-->|7|--> NULL
-//                b
-//------------ tail = tail->next ----------------------
-// Step 4:
-//                t     a
-//         |d|-->|2|   |8|--> NULL
-//                ↓
-//               |N|
-//
-//               |3|-->|7|--> NULL
-//                b
-//------------ moveNode( &b, &(tail->next) ) ----------
-// Step 5:
-//                t     a
-//         |d|-->|2|   |8|--> NULL
-//                ↓
-//               |N|
-//                ^
-//                |
-//               |3|   |7|--> NULL
-//                      b
-//------------ moveNode( &b, &(tail->next) ) ----------
-// Step 6:
-//                t     a
-//         |d|-->|2|   |8|--> NULL
-//              /
-//             |  |N|
-//             |   ^
-//             |   |
-//              \_|3|   |7|--> NULL
-//                      b
-//-----------------------------------------------------
-// Step 7:
-//                      a
-//         |d|-->|2|   |8|--> NULL
-//              /
-//             |  |N|
-//             |   ^
-//             |   |
-//              \_|3|   |7|--> NULL
-//                 t     b
-//-----------------------------------------------------
-// Step 8:
-//                      a
-//         |d|-->|2|   |8|--> NULL
-//              /
-//             |  |N|<---|
-//             |   ^     |
-//             |   |     |
-//              \_|3|   |7|   NULL
-//                 t            b
-//-----------------------------------------------------
-// Step 9:
-//                      a
-//         |d|-->|2|   |8|--> NULL
-//              /
-//             |  |N|<---|
-//             |         |
-//             |         |
-//              \_|3|-->|7|   NULL
-//                 t            b
-//-----------------------------------------------------
-// Step 10:
-//                      a
-//         |d|-->|2|   |8|--> NULL
-//              /
-//             |  |N|<---|
-//             |         |
-//             |         |
-//              \_|3|-->|7|   NULL
-//                       t      b
-//-----------------------------------------------------
-// Step 11:
-//                       a
-//         |d|-->|2|    |8|--> NULL
-//              /        |
-//             |  |N|    |
-//             |         |
-//             |         |
-//              \_|3|-->|7|   NULL
-//                       t      b
-//=====================================================
-
-node_t* mergeSortedList2( node_t *a, node_t *b )
-{
-   node_t dummy, *tail;
-
-   tail = &dummy;
-
-   dummy.next = NULL;
-
-
-   while ( 1 ){
-
-      if ( a == NULL ) { tail->next = b; break; }
-      if ( b == NULL ) { tail->next = a; break; }
-
-      if ( a->value <= b->value )
-         moveNode( &a, &(tail->next) );
-      else
-         moveNode( &b, &(tail->next) );
-
-      tail = tail->next;
-
-   }
-
-   return dummy.next;
-}
-
+#endif
+#endif
 
 int main(){
 
@@ -351,15 +296,14 @@ int main(){
 
    // merge sorted list
    node_t *list3 = NULL;
-   list3 = mergeSortedList2( list1, list2 );
+   list3 = mergeSortedList( list1, list2 );
 
    // print result
    printList(list3);
 
 
    // free memory
-   freeList(list1);
-   freeList(list2);
+   freeList(list3);
 
    return 0;
 }
