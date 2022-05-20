@@ -51,8 +51,23 @@ void swap( int *x, int *y ){
 
 }
 
-
-int binarySearch( int **intervals, int intervalsSize, int target, bool leftIdx ){
+//=============================================================================================
+//  Description : find the position of a target value within a sorted array
+//
+//  Input       : intervals     : the original intervals[i][2] given by problem
+//                                --> intervals[i][0] and intervals[i][1] stores the start and
+//                                    the end, respectively, of the i-th intervals
+//                                     --> i ranges from 0 to intervalsSize-1
+//                intervalsSize : the number of intervals in intervals[i][2]
+//                target        : the target you interested in
+//                startIdx      : (false/true)-->find the position of the start/end point of
+//                                the inserted interval
+//
+//  Output      : target is     in the sorted array : return the position of the target
+//                target is not in the sorted array : if startIdx == (true/false)
+//                --> return the nearest position to the (right/left) of target
+//==============================================================================================
+int binarySearch( int **intervals, int intervalsSize, int target, bool startIdx ){
 
    int l = -1;
    int r = intervalsSize;
@@ -61,48 +76,74 @@ int binarySearch( int **intervals, int intervalsSize, int target, bool leftIdx )
 
       int m = l + (r-l)/2;
 
-      int middleValue = (leftIdx) ? intervals[m][1] : intervals[m][0];
+      int middleValue = (startIdx) ? intervals[m][1] : intervals[m][0];
 
       if      ( middleValue < target ) l = m;
       else if ( middleValue > target ) r = m;
       else                          return m;
    }
 
-   if (leftIdx)  return r;
-   else          return l;
+   if (startIdx)  return r;
+   else           return l;
 }
 
 
-/**
- * Return an array of arrays of size *returnSize.
- * The sizes of the arrays are returned as *returnColumnSizes array.
- * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
- */
+//=============================================================================================
+// Description : append interval [start, end] to the array at idx
+//=============================================================================================
+void addInterval( int **array, int idx, int start, int end ){
+
+   array[idx] = (int*)malloc(2*sizeof(int));
+   array[idx][0] = start;
+   array[idx][1] = end;
+
+}
+
+
+//=============================================================================================
+// Description :
+//
+// Input       : intervals         : the original intervals[i][2] given by problem
+//                                   --> intervals[i][0] and intervals[i][1] stores the start and
+//                                       the end, respectively, of the i-th intervals
+//                                        --> i ranges from 0 to intervalsSize-1
+//               intervalsSize     : the number of intervals in intervals[i][2]
+//               intervalsColSize  : an 1-D array storing the size of each interval within intervals
+//               newInterval       : the new interval to be inserted
+//               newIntervalSize   : the number of intervals within the newInterval
+//               returnSize        : the unmber of intervals within an returned array (answer)
+//               returnColumnSizes : an 1-D array storing the size of each interval within returned array
+//
+// Output      : an returned 2D array storing the inserted/merged interval
+//=============================================================================================
+
 int** insert(int** intervals, int intervalsSize, int* intervalsColSize,
              int* newInterval, int newIntervalSize, int* returnSize, int** returnColumnSizes)
 {
 
    int **returnArray = NULL;
 
-
-
+// handle the case that intervalsSize is zero
    if ( intervalsSize == 0 ){
+
       *returnSize = 1;
       *returnColumnSizes = (int*)malloc(*returnSize*sizeof(int));
+
       for (int i=0;i<*returnSize;i++) (*returnColumnSizes)[i] = 2;
+
       returnArray    = (int**)calloc(1,sizeof(int*));
-      returnArray[0] = (int*)calloc(2,sizeof(int));
-      returnArray[0][0] = newInterval[0];
-      returnArray[0][1] = newInterval[1];
+
+      addInterval( returnArray, 0, newInterval[0], newInterval[1] );
+
       return returnArray;
    }
 
-// get the index that the starting point of the inseted interval should be at in intervals.
+// get the position of start/end of the newInterval
    int left  = binarySearch( intervals, intervalsSize, newInterval[0], true );
    int right = binarySearch( intervals, intervalsSize, newInterval[1], false);
 
 
-// insert
+// perform insertion
    if ( left == right+1 ){
 
 //    initialize the returnArray
@@ -111,65 +152,63 @@ int** insert(int** intervals, int intervalsSize, int* intervalsColSize,
 
       swap( &left, &right );
 
-      for( int i=0;i<*returnSize;i++ ){
+      for( int i=0; i<*returnSize; i++ ){
 
          returnArray[i] = (int*)malloc(2*sizeof(int));
 
-         if ( i < left ){
-           returnArray[i][0] = intervals[i][0];
-           returnArray[i][1] = intervals[i][1];
+//       copy the left part of the intervals to returnArray
+         if ( i < left +1 ){
+           addInterval( returnArray, i, intervals[i][0], intervals[i][1] );
          }
-         else if ( i ==  left ){
-           returnArray[i][0] = newInterval[0];
-           returnArray[i][1] = newInterval[1];
+//       insert newInterval into returnArray
+         else if ( i ==  left+1 ){
+           addInterval( returnArray, i,   newInterval[0],  newInterval[1] );
          }
+//       copy the right part of the intervals to returnArray
          else{
-           returnArray[i][0] = intervals[i-1][0];
-           returnArray[i][1] = intervals[i-1][1];
+           addInterval( returnArray, i, intervals[i-1][0], intervals[i-1][1] );
          }
       }
 
    }
 
-// merge
+// merge intervals
    else{
 
-      int leftNonMergedIdx, rightNonMergedIdx;
-      int numMergedIntervals;
+      int maxIdxLeftUnperturbedBin, minIdxRightUnperturbedBin, numPerturbedBins;
 
-      // determine the left/right index of merged interval
-      leftNonMergedIdx = left-1;
-      rightNonMergedIdx = right+1;
+//    the maximum index of the unperturbed bins on the left perturbed region
+      maxIdxLeftUnperturbedBin  = left-1;
 
-      numMergedIntervals = rightNonMergedIdx-leftNonMergedIdx-1;
+//    the minimum index of the unperturbed bins on the right perturbed region
+      minIdxRightUnperturbedBin = right+1;
+
+//    the number of unperturbed intervals
+      numPerturbedBins = minIdxRightUnperturbedBin-maxIdxLeftUnperturbedBin-1;
 
 //    initialize the returnArray
-      *returnSize = intervalsSize-numMergedIntervals+1;
+      *returnSize = intervalsSize-numPerturbedBins+1;
       returnArray = (int**)calloc(*returnSize, sizeof(int*));
 
-
+//    the start/end of the merged bin
       newInterval[0] = MIN( newInterval[0], intervals[left ][0] );
       newInterval[1] = MAX( newInterval[1], intervals[right][1] );
 
 
       for( int i=0;i<*returnSize;i++ ){
 
-         returnArray[i] = (int*)malloc(2*sizeof(int));
-
-         // copy data from intervals to returnArray before the merged interval
-         if      ( i <= leftNonMergedIdx ){
-            returnArray[i][0] = intervals[i][0];
-            returnArray[i][1] = intervals[i][1];
+//       copy the left part of the intervals to returnArray
+         if      ( i <= maxIdxLeftUnperturbedBin ){
+            addInterval( returnArray, i, intervals[i][0], intervals[i][1] );
          }
-         // copy data from intervals to returnArray after the merged interval
-         else if ( i == leftNonMergedIdx+1 ){
-            returnArray[i][0] = newInterval[0];
-            returnArray[i][1] = newInterval[1];
+//       copy the merged bin to returnArray
+         else if ( i == maxIdxLeftUnperturbedBin+1 ){
+            addInterval( returnArray, i, newInterval[0], newInterval[1] );
          }
-         // copy data from newInterval to returnArray
+//       copy the right part of the intervals to returnArray
          else{
-            returnArray[i][0] = intervals[i+numMergedIntervals-1][0];
-            returnArray[i][1] = intervals[i+numMergedIntervals-1][1];
+            addInterval( returnArray, i, intervals[i+numPerturbedBins-1][0],
+                                         intervals[i+numPerturbedBins-1][1] );
          }
       }
    }
@@ -179,14 +218,13 @@ int** insert(int** intervals, int intervalsSize, int* intervalsColSize,
    for (int i=0;i<*returnSize;i++) (*returnColumnSizes)[i] = 2;
 
    return returnArray;
-
 }
 
 
 
 int main(){
 
-   // Initialize intervals
+   // initialize intervals
    int intervalsColSize = 2;
    int intervalsSize = 4;
    int **intervals = (int**)malloc(intervalsSize*sizeof(int*));
@@ -199,22 +237,22 @@ int main(){
    intervals[2][0] = 6;   intervals[2][1] = 7;
    intervals[3][0] = 10;   intervals[3][1] = 1000;
 
-   // Initialize the interval to be inserted
+   // initialize the interval to be inserted
    int newIntervalSize = 1;
    int newInterval[2] = {8 ,11};
 
-   // Insertion
+   // insertion
    int returnSize;
    int *returnColumnSizes = NULL;
    int **returnArray = insert( intervals, intervalsSize, &intervalsColSize,
                                newInterval, newIntervalSize, &returnSize, &returnColumnSizes );
 
-   // Print result
+   // print result
    for ( int i=0; i<returnSize; i++){
          printf("%d %d\n", returnArray[i][0], returnArray[i][1]);
    }
 
-   // Free memory
+   // free memory
    for (int i=0;i<intervalsSize;i++)  free(intervals[i]);     free(intervals);
    for (int i=0;i<returnSize;i++) free(returnArray[i]);       free(returnArray);
    free(returnColumnSizes);
