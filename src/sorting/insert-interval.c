@@ -1,3 +1,7 @@
+// TITLE: insert interval
+// LEVEL: medium
+// TAG: sorting, merge-intervals
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -101,7 +105,7 @@ void addInterval( int **array, int idx, int start, int end ){
 
 
 //=============================================================================================
-// Description :
+// Description : insert an interval into the original intervals given by problem
 //
 // Input       : intervals         : the original intervals[i][2] given by problem
 //                                   --> intervals[i][0] and intervals[i][1] stores the start and
