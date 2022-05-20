@@ -64,27 +64,32 @@ void mergeSort( int **arr, int l, int r ){
 int** merge(int** intervals, int  intervalsSize,  int*  intervalsColSize,
                              int* returnSize,     int** returnColumnSizes)
 {
+
+// sort the start points within intervals
    mergeSort( intervals, 0, intervalsSize-1 );
 
-   int **result = NULL;
    *returnSize = 1;
 
-   result = (int**)calloc(intervalsSize, sizeof(int*));
+   int **returnArray = (int**)calloc(intervalsSize, sizeof(int*));
 
-   result[0] = (int*)malloc(2*sizeof(int));
-   result[0][0] = intervals[0][0];
-   result[0][1] = intervals[0][1];
+// add the first interval to returnArray array
+   returnArray[0] = (int*)malloc(2*sizeof(int));
+   returnArray[0][0] = intervals[0][0];
+   returnArray[0][1] = intervals[0][1];
 
 
    for ( int i=1;i<intervalsSize;i++ ){
-      // merge
-      if ( result[(*returnSize)-1][1] >= intervals[i][0] ){
-         result[(*returnSize)-1][1] = MAX(result[(*returnSize)-1][1], intervals[i][1]);
+
+      // merge intervals
+      if ( returnArray[(*returnSize)-1][1] >= intervals[i][0] ){
+         returnArray[(*returnSize)-1][1] = MAX(returnArray[(*returnSize)-1][1], intervals[i][1]);
       }
+
+      // add interval
       else{
-         result[(*returnSize)++] = (int*)malloc(2*sizeof(int));
-         result[(*returnSize)-1][0] = intervals[i][0];
-         result[(*returnSize)-1][1] = intervals[i][1];
+         returnArray[(*returnSize)++] = (int*)malloc(2*sizeof(int));
+         returnArray[(*returnSize)-1][0] = intervals[i][0];
+         returnArray[(*returnSize)-1][1] = intervals[i][1];
       }
    }
 
@@ -94,7 +99,7 @@ int** merge(int** intervals, int  intervalsSize,  int*  intervalsColSize,
    for (int i=0;i<*returnSize;i++) (*returnColumnSizes)[i] = 2;
 
 
-   return result;
+   return returnArray;
 }
 
 
