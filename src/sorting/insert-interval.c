@@ -1,6 +1,6 @@
 // TITLE: insert interval
 // LEVEL: medium
-// TAG: sorting, merge-intervals
+// TAG: sorting, merge, interval, binary-search
 
 #include <stdio.h>
 #include <stdlib.h>
