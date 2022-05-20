@@ -26,7 +26,6 @@ double myPow( double x, int n ){
 
    while(absn){
 
-
       if (absn&1)    result *= xPower;
 
       xPower *= xPower;
