@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
+// Two's complement representation of signed integer
 // 000   0
 // 001   1
 // 010   2
