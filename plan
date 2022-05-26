@@ -1,21 +1,29 @@
 # https://leetcode.com/problemset/all/
 
 # high-frequency questions
+array
+-- sliding window
+-- cyclic sort
+-- merge intervals =========
+-- Top k element
+-- two-pointers
+-- next greater element
 sortings
--- quick sort
--- merge sort
+-- quick sort =========
+-- merge sort =========
 --
 linked list
--- dummy-node
--- fast-slow-pointers
+-- dummy-node =========
+-- fast-slow-pointers ==========
 -- recurssion
 string
 heap
+-- two heap
 stack
 queue
 hash
-binary search
-two-pointer
+binary search =========
+two-pointer =======
 BFS
 DFS
 prefix-sum
