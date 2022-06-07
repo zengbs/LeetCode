@@ -1,5 +1,5 @@
 // TITLE: Maximum Difference Between Increasing Elements
-// TAG: array, hash
+// TAG: array, hash, linked-list
 // LEVEL: easy
 
 

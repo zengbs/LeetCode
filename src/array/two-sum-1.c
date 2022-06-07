@@ -1,6 +1,6 @@
 // TITLE: two sum
 // LEVEL: easy
-// TAG: array, hash
+// TAG: array, hash, linked-list
 
 #include<stdio.h>
 #include<stdbool.h>

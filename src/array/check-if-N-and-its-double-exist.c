@@ -1,5 +1,5 @@
 // TITLE: Check If N and Its Double Exist
-// TAG: hash, array
+// TAG: hash, array, linked-list
 // LEVEL: easy
 
 #include<stdio.h>
