@@ -31,14 +31,14 @@ void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n)
 
 int main (){
 
-   int arr1[] = { 2 };
-   int arr2[] = { 1 };
+   int arr1[] = { 2,3,4,5,6,6,7,7,7,7,8 };
+   int arr2[] = { 1,2,2,3,4,5,7,8 };
 
    int arr1Size = sizeof(arr1)/sizeof(arr1[0]);
    int arr2Size = sizeof(arr2)/sizeof(arr2[0]);
 
-   int m = 1;
-   int n = 1;
+   int m = arr1Size;
+   int n = arr2Size;
 
    merge(arr1, arr1Size, m, arr2, arr2Size, n ) ;
 
