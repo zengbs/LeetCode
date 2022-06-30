@@ -1,3 +1,6 @@
+// https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -20,7 +23,7 @@ void FindPrimes(int N)
 
    // Perform Sieve of Eratosthenes
    // Why is `bound` sqrt(N)?
-   // --> because j start from i squared
+   // --> because j start from i*i
    int bound = (int)sqrtf((float)N);
 
    for (int i=2;i<=bound;i++){
