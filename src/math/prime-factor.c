@@ -1,26 +1,35 @@
 #include <stdio.h>
+#include <math.h>
 
-void primeFactors(int n)
+void PrimeFactor( int N )
 {
-  int c = 2;
 
-  while (n > 1) {
+   int bound = (int)sqrtf( (float)N );
 
-    if (n % c == 0) {
-      printf("%d ", c);
-      n /= c;
-    }
-    else
+   int c = 2;
+
+   for ( int i=2; i<=N; i++ ){
+
+      if ( N%c == 0 ){
+
+         printf("%d ", c);
+
+         // do not divide c further when no factor c is in N
+         while( N>1 && N%c==0 )  N /= c;
+      }
+
       c++;
-  }
+   }
 
-  printf("\n");
+   printf("\n");
 }
 
-/* Driver code */
+
+
+
 int main()
 {
-  int n = 18;
-  primeFactors(n);
+  int n = 135464;
+  PrimeFactor(n);
   return 0;
 }
