@@ -27,7 +27,7 @@ void merge(int arr[], int l, int m, int r)
 
    // if ( left[subl] > right[subr] ): descending order
    // if ( left[subl] < right[subr] ):  ascending order
-   for( int i=l; i<=r; i++ ){
+   for( int i=l; i<=r; i++ ){ // NOTE: i ranges from l to r
       if ( left[subl] < right[subr] )  arr[i] = left[subl++];
       else                             arr[i] = right[subr++];
    }
