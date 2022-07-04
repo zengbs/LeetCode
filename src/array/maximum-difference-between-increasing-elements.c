@@ -1,9 +1,3 @@
-// TITLE: Maximum Difference Between Increasing Elements
-// TAG: array
-// LEVEL: easy
-
-
-
 #include <stdio.h>
 #include <limits.h>
 

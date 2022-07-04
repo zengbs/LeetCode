@@ -1,27 +1,23 @@
-// TITLE: Maximum Subarray
-// LEVEL: easy
-// TAG: array, greedy, dynamic-programming
-
 #include<stdio.h>
 #include<limits.h>
 
 
 int maxSubArray(int* nums, int numsSize){
 
-   int count = 0;
-   int result = INT_MIN;
+   int sum = 0;
+   int maxSum = INT_MIN;
 
    for ( int i=0; i<numsSize; i++ ){
 
-      count += nums[i];
+      sum += nums[i];
 
-      if ( result < count ) result = count;
+      if ( maxSum < sum ) maxSum = sum;
 
-      if ( count < 0 ) count = 0;
+      if ( sum < 0 ) sum = 0;
 
    }
 
-   return result;
+   return maxSum;
 }
 
 int main(){

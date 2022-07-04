@@ -1,6 +1,7 @@
 // TITLE: Merge Sorted Array
-// TAG: array
+// TAG: array, multiple-pointer
 // LEVEL: easy
+// LINK: https://leetcode.com/problems/merge-sorted-array/
 
 #include <stdio.h>
 #include <stdlib.h>

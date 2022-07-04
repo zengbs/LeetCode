@@ -1,9 +1,3 @@
-// TITLE: Minimum Size Subarray Sum
-// TAG: array, sliding window
-// LEVEL: medium
-
-
-
 #include<stdio.h>
 #include<limits.h>
 #include"../include/array.h"

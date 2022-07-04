@@ -1,7 +1,3 @@
-// TITLE: Maximum Difference Between Increasing Elements
-// TAG: array, hash, linked-list
-// LEVEL: easy
-
 
 #include <stdio.h>
 #include <stdlib.h>
