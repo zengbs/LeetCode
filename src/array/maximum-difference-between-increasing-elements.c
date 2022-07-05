@@ -4,22 +4,24 @@
 
 int maximumDifference(int* nums, int numsSize){
 
-
-   int left = 0;
-   int right = 1;
-
-   int maxDiff = 0;
+   int left  = 0;
+   int right = 0;
+   int diff;
+   int maxDiff = -1; //
 
    while( right < numsSize ){
 
-      if ( nums[left] > nums[right]) left = right;
+      if ( nums[left] > nums[right] ) left = right;
 
-      if ( nums[right]-nums[left] > maxDiff ) maxDiff = nums[right]-nums[left];
+      diff = nums[right]-nums[left];
+
+
+      if ( 0 < diff && diff > maxDiff ) maxDiff = diff;
 
       right++;
    }
 
-   return ( maxDiff == 0 ) ?  -1 : maxDiff;
+   return (maxDiff == -1) ? -1 : maxDiff;
 
 }
 
