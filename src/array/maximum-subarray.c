@@ -1,24 +1,26 @@
 #include<stdio.h>
 #include<limits.h>
 
-
 int maxSubArray(int* nums, int numsSize){
+
+   int right = 0;
 
    int sum = 0;
    int maxSum = INT_MIN;
 
-   for ( int i=0; i<numsSize; i++ ){
-
-      sum += nums[i];
-
-      if ( maxSum < sum ) maxSum = sum;
+   while( right < numsSize ){
 
       if ( sum < 0 ) sum = 0;
 
+      sum += nums[right++];
+
+      if ( maxSum < sum ) maxSum = sum;
    }
 
    return maxSum;
+
 }
+
 
 int main(){
 

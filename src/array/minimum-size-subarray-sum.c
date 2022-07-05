@@ -5,25 +5,28 @@
 
 int minSubArrayLen(int target, int* nums, int numsSize){
 
-   int l = 0;
+   int left = 0;
+   int right = 0;
+   int length;
+   int minLength = INT_MAX;
    int sum = 0;
-   int length = 0;
-   int result = INT_MAX;
 
-   for (int r=0;r<numsSize;r++){
+   while( right < numsSize ){
 
-      sum += nums[r];
+      sum += nums[right];
 
-      length = r-l+1;
+      while( sum >= target ){
 
-      while (sum>=target){
-         if ( result > length ) result = length;
-         sum -= nums[l++];
-         length--;
+         length = right - left + 1;
+
+         if ( minLength > length ) minLength = length;
+
+         sum -= nums[left++];
       }
+      right++;
    }
 
-   return result == INT_MAX ? 0 : result;
+   return ( minLength == INT_MAX ) ? 0 : minLength;
 }
 
 

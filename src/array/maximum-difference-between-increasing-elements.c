@@ -1,28 +1,26 @@
 #include <stdio.h>
 #include <limits.h>
 
-
 int maximumDifference(int* nums, int numsSize){
 
-   int left  = 0;
+   int left = 0;
    int right = 0;
+
    int diff;
-   int maxDiff = -1; //
+   int maxDiff = INT_MIN;
 
    while( right < numsSize ){
 
       if ( nums[left] > nums[right] ) left = right;
 
-      diff = nums[right]-nums[left];
+      diff = nums[right] - nums[left];
 
-
-      if ( 0 < diff && diff > maxDiff ) maxDiff = diff;
+      if ( diff > 0 && maxDiff < diff ) maxDiff = diff;
 
       right++;
    }
 
-   return (maxDiff == -1) ? -1 : maxDiff;
-
+   return maxDiff == INT_MIN ? -1 : maxDiff;
 }
 
 
