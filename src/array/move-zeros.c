@@ -1,3 +1,5 @@
+// Ref: https://leetcode.com/problems/move-zeroes/discuss/172432/THE-EASIEST-but-UNUSUAL-snowball-JAVA-solution-BEATS-100-(O(n))-%2B-clear-explanation
+
 #include <stdio.h>
 
 
@@ -12,14 +14,20 @@ void swap( int *a, int *b ){
 
 void moveZeroes(int* nums, int numsSize){
 
-   if (numsSize == 1) return;
+   int right = 0;
 
-   int x = 0;
-   int y = 0;
+   int snowBallSize = 0;
 
-   while(y < numsSize){
-      if ( nums[y] == 0 ) { y++; }
-      else {swap( &nums[x], &nums[y] ); y++; x++; }
+   while( right < numsSize ){
+
+      if ( nums[right] == 0){
+         snowBallSize++;
+      }
+      else if (snowBallSize > 0){
+         swap( &nums[right], &nums[right-snowBallSize] );
+      }
+
+      right++;
    }
 
 }
