@@ -8,15 +8,13 @@ int search(int* nums, int numsSize, int target){
 
    int l = -1;
    int r = numsSize;
-
-   int m = l + (r-l)/2;
+   int m;
 
    while( l+1 < r ){
-      if      ( nums[m] > target )  r = m;
-      else if ( nums[m] < target )  l = m;
-      else                       return m;
-
       m = l + (r-l)/2;
+      if      ( nums[m] < target ) l = m;
+      else if ( nums[m] > target ) r = m;
+      else    return m;
    }
 
    return -1;
