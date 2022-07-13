@@ -8,22 +8,21 @@
 
 int maxArea(int* height, int heightSize){
 
-   int volume;
-   int maxVolume = INT_MIN;
-
-   int left  = 0;
+   int left = 0;
    int right = heightSize-1;
 
+   int volume;
+   int maxVolume = 0;
 
    while( left < right ){
 
-      volume = ( right - left ) * MIN( height[right], height[left] );
+      volume = ( right - left )*MIN( height[right], height[left] );
+
       if ( maxVolume < volume ) maxVolume = volume;
 
-
-      if      ( height[left] < height[right] ) left++;
-      else if ( height[left] > height[right] ) right--;
-      else {right--; left++;}
+      if      ( height[left]  >  height[right] )     right--;
+      else if ( height[right] >  height[left] )      left++;
+      else { left++; right--; }
    }
 
    return maxVolume;
