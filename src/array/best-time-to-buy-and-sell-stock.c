@@ -4,19 +4,19 @@
 
 int maxProfit(int* prices, int pricesSize){
 
-   int buy = 0;
+   int buy  = 0;
    int sell = 0;
 
-   int profit;
    int maxProfit = 0;
+   int profit;
 
    while( sell < pricesSize ){
 
       profit = prices[sell] - prices[buy];
 
-      if (profit < 0) { buy = sell; profit = 0; }
-
       if ( maxProfit < profit ) maxProfit = profit;
+
+      if ( profit < 0 ) buy = sell;
 
       sell++;
    }
@@ -25,10 +25,9 @@ int maxProfit(int* prices, int pricesSize){
 }
 
 
-
 int main(){
 
-   int nums[] = {7,6,4,3,1};
+   int nums[] = {7,6,4,3,1, 94, 5};
 
    int numsSize = sizeof(nums)/sizeof(nums[0]);
 
