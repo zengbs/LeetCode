@@ -4,7 +4,7 @@ public:
 
        std::unordered_map<int,int> umap;
 
-       std::vector<int> ans = {1,1};
+       std::vector<int> ans(2);
 
        int index = 0;
 
