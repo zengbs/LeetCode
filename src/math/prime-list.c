@@ -1,13 +1,38 @@
 // https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <stdbool.h>
 
-#define SIEVE_OF_ERATOSTHENES
+//#define SIEVE_OF_ERATOSTHENES
+#define NAIVE
 
+#ifdef NAIVE
+bool isPrime( int N ){
+
+   int flag = true;
+
+   int bound = (int)sqrtf((float)N); // 3
+
+   // i = 2,...,"bound"
+   for (int i=2; i<=bound; i++){
+      if ( N%i == 0 ){
+         flag = false;
+         break;
+      }
+   }
+
+   return flag;
+}
+
+void FindPrimes( int N ){
+   for ( int i=2;i<=N;i++ ){
+      if ( isPrime(i) ) printf( "%d\n", i );
+   }
+}
+
+#endif
 
 #ifdef SIEVE_OF_ERATOSTHENES
 // Time complexity: O(N log log N)
