@@ -14,12 +14,14 @@ public:
       prefix[0]        = 1;
       suffix[length-1] = 1;
 
+      // prefix
       for ( int i=1; i<length; i++ ){
          prefix[i] = prefix[i-1] * nums[i-1];
          suffix[length-i-1] = suffix[length-i] * nums[length-i];
       }
 
 
+      // suffix
       for (int i=0; i<length; i++){
          answer[i] = prefix[i]*suffix[i];
       }
